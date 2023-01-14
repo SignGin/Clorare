@@ -1,3 +1,17 @@
 {
-  "extends": "next/core-web-vitals"
+  // "extends": ["next/core-web-vitals", "plugin:prettier/recommended"]
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
+  "extends": ["aribnb"],
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ]
+  }
 }

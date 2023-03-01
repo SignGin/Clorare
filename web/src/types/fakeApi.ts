@@ -1,6 +1,7 @@
-export interface FakePost {
-  userId: number;
+export interface FakePhoto {
+  albumId: number;
   id: number;
   title: string;
-  body: string;
+  url: string;
+  thumbnailUrl: string;
 }

@@ -6,6 +6,7 @@ import AppLayout from '@/components/AppLayout';
 import Footer from '@/components/Footer';
 import { FakePhoto } from '@/types/fakeApi';
 import { motionVariants } from '@/utils/motion';
+import Link from 'next/link';
 
 const photoApi = async (): Promise<FakePhoto> => {
   const data = await axios.get('https://jsonplaceholder.typicode.com/photos/2');
@@ -30,6 +31,12 @@ export default function Home({ randomBgColor }: { randomBgColor: string }) {
         <h1 className="text-2xl my-4">
           Clothing recommendation service according to the weather
         </h1>
+        <Link
+          href="/node"
+          className="border-4 border-orange-700 hover:border-orange-900 hover:bg-slate-50 p-1 rounded-md"
+        >
+          Node 데모 서버
+        </Link>
         {data ? (
           <motion.div
             className="flex flex-col items-center py-4"

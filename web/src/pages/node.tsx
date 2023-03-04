@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react';
 import axios from 'axios';
 import AppLayout from '@/components/AppLayout';
+import AnimationWeather from '@/components/AnimationWeather';
 
 interface tmpStyle {
   comment: string;
@@ -38,6 +39,7 @@ function Node() {
           )}
         </div>
       </div>
+      <AnimationWeather />
     </AppLayout>
   );
 }

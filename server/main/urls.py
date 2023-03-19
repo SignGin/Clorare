@@ -4,8 +4,9 @@ from restapi import views
 
 
 router = routers.DefaultRouter()
-router.register(r'users', views.UserViewSet)
-router.register(r'groups', views.GroupViewSet)
+# router.register(r'analysis', views.AnalysisViewSet)
+router.register(r'clothes', views.ClothesViewSet)
+router.register(r'reco', views.Recommendation)
 
 urlpatterns = [
     path('', include(router.urls)),

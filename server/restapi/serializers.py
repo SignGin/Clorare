@@ -1,14 +1,15 @@
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import User
 from rest_framework import serializers
+from weatherdata.models import Clothes
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+# class AnalysisSerializer(serializers.HyperlinkedModelSerializer):
+#     class Meta:
+#         model = Analysis
+#         fields = ['weather_des', 'temp', 'feels_like', 'temp_min', 'temp_max', 'humidity', 'wind_speed']
+
+
+class ClothesSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = User
-        fields = ['pk', 'username', 'email', 'groups']
-
-
-class GroupSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Group
-        fields = ['url', 'name']
+        model = Clothes
+        fields = ['position', 'cloth', 'color']

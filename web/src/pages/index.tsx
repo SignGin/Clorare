@@ -31,11 +31,17 @@ export default function Home({ randomBgColor }: { randomBgColor: string }) {
         <h1 className="text-2xl my-4">
           Clothing recommendation service according to the weather
         </h1>
-        <Link
+        {/* <Link
           href="/node"
           className="border-4 border-orange-700 hover:border-orange-900 hover:bg-slate-50 p-1 rounded-md"
         >
           Node 데모 서버
+        </Link> */}
+        <Link
+          href="/reco"
+          className="border-4 border-orange-700 hover:border-orange-900 hover:bg-slate-50 p-1 rounded-md"
+        >
+          Let's Go ~!
         </Link>
         <div className="h-full">
           {data ? (

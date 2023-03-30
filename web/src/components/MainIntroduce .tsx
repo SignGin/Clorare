@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 
+const subTitle = 'text-lg font-bold';
 const defaultTextClass = 'tracking-widest';
 
 function MainIntroduce() {
@@ -17,30 +18,34 @@ function MainIntroduce() {
   }, [inView]);
   return (
     <div className="my-20" ref={ref}>
-      <h1 className="text-2xl mb-20">Test</h1>
+      <h1 className="text-2xl mb-20">옷을 잘 챙겨 입으세요!</h1>
+      <h4 className={subTitle + ' ' + textClass}>당신은 아름답습니다.</h4>
       <p className={textClass}>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab beatae
-        libero cum ut veritatis quis facere ipsam, consectetur quia inventore
-        aspernatur odit ipsa voluptatum hic iusto, numquam quibusdam vitae modi
-        sed eum recusandae neque perferendis pariatur. Dolorum, necessitatibus
-        veniam tempore placeat est consectetur nihil ullam accusamus, atque
-        soluta molestiae modi veritatis! Consequatur beatae eum animi
-        accusantium mollitia error aperiam, dolor ducimus omnis libero qui
-        iusto, possimus nostrum tempore veniam tempora recusandae asperiores
-        voluptatum quia sapiente. Commodi, libero? Quaerat assumenda ab, magni
-        consectetur nesciunt exercitationem cupiditate corporis sed ea dolores
-        velit, iusto vero recusandae eveniet totam voluptates possimus eaque
-        fugit doloremque eos officia excepturi hic sapiente. Quae, eligendi
-        optio et, sunt dolorem quisquam vero atque eius adipisci, ea officia
-        consequuntur dicta rem dolor eveniet consectetur quos odit voluptatem
-        fugiat saepe. Consequatur fugiat dolorem nemo neque, veritatis suscipit
-        nulla autem hic numquam perspiciatis? Magni ad voluptatem nulla, quasi
-        dignissimos error labore, eos dolorum minus consequatur suscipit. Iusto
-        nostrum culpa deleniti commodi! Nesciunt culpa sed quasi odit natus,
-        animi ratione fugiat maxime est optio incidunt nulla distinctio sapiente
-        aspernatur provident eos unde, quae minima assumenda earum recusandae
-        dolores ex? Tempore laudantium magni eos nihil facere illo, nobis
-        incidunt inventore excepturi, odio eligendi beatae!
+        옷을 잘 챙겨 입는 것은 중요합니다.
+        <br /> 복장을 통해서 자신을 표현하세요.
+        <br />
+        아름다운 옷은 자신감을 키워주고 당신의 삶을 윤택하게 만듭니다.
+      </p>
+      <br />
+      <h4 className={subTitle + ' ' + textClass}>
+        의복으로 당신을 보호하세요.
+      </h4>
+      <p className={textClass}>
+        튼튼한 복장으로 자신의 몸을 지키세요.
+        <br /> 위험한 순간에 적절한 복장이 당신의 삶과 가족을 구할 수도
+        있습니다.
+        <br /> 늘 신중하고 꼼꼼하게 의복을 챙겨입으세요.
+        <br /> 당신의 늘 평온하고 안전한 삶을 응원하겠습니다.
+        <br />
+      </p>
+      <br />
+      <h4 className={subTitle + ' ' + textClass}>
+        당신의 소중한 순간에 함께하겠습니다.
+      </h4>
+      <p className={textClass}>
+        당신이 기쁘거나 슬플때도 늘 함께하겠습니다.
+        <br /> 포근하고 청량한 당신의 옷은 늘 함께합니다.
+        <br /> 당신의 건강한 삶을 응원합니다!
       </p>
     </div>
   );

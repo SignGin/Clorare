@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import Head from 'next/head';
+import Footer from './Footer';
 
 function AppLayout({ children }: { children: ReactNode }) {
   return (
@@ -11,6 +12,7 @@ function AppLayout({ children }: { children: ReactNode }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {children}
+      <Footer />
     </div>
   );
 }

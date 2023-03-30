@@ -3,10 +3,10 @@ import axios from 'axios';
 import { motion } from 'framer-motion';
 
 import AppLayout from '@/components/AppLayout';
-import Footer from '@/components/Footer';
 import { FakePhoto } from '@/types/fakeApi';
 import { motionVariants } from '@/utils/motion';
 import Link from 'next/link';
+import MainIntroduce from '@/components/MainIntroduce ';
 
 const photoApi = async (): Promise<FakePhoto> => {
   const data = await axios.get('https://jsonplaceholder.typicode.com/photos/2');
@@ -26,30 +26,38 @@ export default function Home({ randomBgColor }: { randomBgColor: string }) {
   return (
     <AppLayout>
       <div
-        className={`flex flex-col items-center text-center ${randomBgColor} h-full`}
+        className={`flex flex-col items-center text-center ${randomBgColor} min-h-screen`}
       >
         <h1 className="text-2xl my-4">
           Clothing recommendation service according to the weather
         </h1>
-        <Link
+        {/* <Link
           href="/node"
           className="border-4 border-orange-700 hover:border-orange-900 hover:bg-slate-50 p-1 rounded-md"
         >
           Node 데모 서버
+        </Link> */}
+        <Link
+          href="/reco"
+          className="border-4 border-orange-700 hover:border-orange-900 hover:bg-slate-50 p-1 rounded-md"
+        >
+          Let's Go ~!
         </Link>
-        {data ? (
-          <motion.div
-            className="flex flex-col items-center py-4"
-            initial="offscreen"
-            whileInView="onscreen"
-            whileHover="onhover"
-          >
-            <motion.img src={data.url} alt="img" variants={motionVariants} />
-            <p>{data.title}</p>
-          </motion.div>
-        ) : null}
+        <div className="h-full">
+          {data ? (
+            <motion.div
+              className="flex flex-col items-center py-4"
+              initial="offscreen"
+              whileInView="onscreen"
+              whileHover="onhover"
+            >
+              <motion.img src={data.url} alt="img" variants={motionVariants} />
+              <p>{data.title}</p>
+            </motion.div>
+          ) : null}
+        </div>
+        <MainIntroduce />
       </div>
-      <Footer />
     </AppLayout>
   );
 }

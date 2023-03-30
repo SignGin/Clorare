@@ -14,7 +14,11 @@ from django.db import models
 
 
 class Clothes(models.Model):
-    position = models.CharField(max_length=20, null=True)  # 입는 부위별 옷 구분
-    cloth = models.CharField(max_length=20)  # 옷 종류
-    color = models.CharField(max_length=20)  # 옷 색
+    category = models.IntegerField()  # 입는 부위별 옷 구분
+    cloth_type = models.CharField(max_length=32)  # 옷 종류
+    color = models.CharField(max_length=16)  # 옷 색
+    temp = models.IntegerField()  # 기온
+    sex = models.IntegerField()  # 성별
 
+    class Meta:
+        ordering = ['category']

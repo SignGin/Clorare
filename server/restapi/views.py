@@ -1,8 +1,11 @@
-from django.http import JsonResponse, HttpResponse
+import json
+from django.db.models import Q
+from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from weatherdata.models import Clothes
 from .serializers import ClothesSerializer
+from django.http import HttpResponse
 
 
 @csrf_exempt
@@ -48,9 +51,20 @@ def request_reco(request, sex):
     obj = Clothes.objects.all()
 
     if request.method == 'GET':
-        obj = Clothes.objects.filter(sex=sex)
-        serializer = ClothesSerializer(obj, many=True)
-        return JsonResponse(serializer.data, safe=False)
+        # w_data = get_weather()
+        obj_0 = Clothes.objects.filter(Q(sex=sex) | Q(sex=2)).filter(category=0).values()[0]
+        obj_1 = Clothes.objects.filter(Q(sex=sex) | Q(sex=2)).filter(category=1).values()[0]
+        # print(obj_0.count())
+
+        context = {
+            'top': obj_0,
+            'bot': obj_1,
+        }
+
+        print(json.dumps(context))
+        return JsonResponse(context, safe='False')
+        # serializer = ClothesSerializer(obj, many=True)
+        # return JsonResponse(serializer.data, safe=False)
 
     elif request.method == 'PUT':
         data = JSONParser().parse(request)
@@ -64,3 +78,7 @@ def request_reco(request, sex):
     elif request.method == 'DELETE':
         obj.delete()
         return HttpResponse(status=204)
+
+
+
+

@@ -23,7 +23,7 @@ city = "Seoul"
 lang = "kr"
 
 
-def get_weather(w_data):
+def get_weather():
     api = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&lang={lang}&units=metric"
 
     result = requests.get(api)
@@ -39,3 +39,5 @@ def get_weather(w_data):
     print("기압은 ",w_data["main"]["pressure"],"입니다.")
     print("풍향은 ", w_data["wind"]["deg"],"입니다.")
     print("풍속은 ", w_data["wind"]["speed"],"입니다.")
+
+    return w_data

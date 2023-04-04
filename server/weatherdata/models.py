@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Q
 
 
 # class Analysis(models.Model):
@@ -21,4 +22,4 @@ class Clothes(models.Model):
     sex = models.IntegerField()  # 성별
 
     class Meta:
-        ordering = ['category']
+        ordering = ['?']

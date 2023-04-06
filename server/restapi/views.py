@@ -3,6 +3,7 @@ from django.db.models import Q
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
+from weatherdata.api import get_weather
 from weatherdata.models import Clothes
 from .serializers import ClothesSerializer
 from django.http import HttpResponse
@@ -51,14 +52,30 @@ def request_reco(request, sex):
     obj = Clothes.objects.all()
 
     if request.method == 'GET':
-        # w_data = get_weather()
-        obj_0 = Clothes.objects.filter(Q(sex=sex) | Q(sex=2)).filter(category=0).values()[0]
-        obj_1 = Clothes.objects.filter(Q(sex=sex) | Q(sex=2)).filter(category=1).values()[0]
-        # print(obj_0.count())
+        w_data = get_weather()
+        if w_data["main"]["feels_like"] < 16:
+            temp = 0
+        elif w_data["main"]["feels_like"] < 22:
+            temp = 1
+        elif w_data["main"]["feels_like"] < 27:
+            temp = 2
+        elif w_data["main"]["feels_like"] >= 27:
+            temp = 3
+        else:
+            pass
+
+        obj_0 = Clothes.objects.filter(Q(sex=sex) | Q(sex=2)).filter(Q(category=0) & Q(temp=temp)).values()[0]
+        obj_1 = Clothes.objects.filter(Q(sex=sex) | Q(sex=2)).filter(Q(category=0) & Q(temp=temp)).values()[0]
 
         context = {
             'top': obj_0,
             'bot': obj_1,
+            'w_data': w_data["weather"][0]["main"],
+            'w_temp': w_data["main"]["temp"],
+            'w_feels_like': w_data["main"]["feels_like"],
+            'w_daily_range': w_data["main"]["temp_max"]-w_data["main"]["temp_min"],
+            'w_humidity': w_data["main"]["humidity"],
+            'w_wind_speed': w_data["wind"]["speed"],
         }
 
         print(json.dumps(context))

@@ -1,0 +1,12 @@
+[
+    {
+        "model": "restapi.clothes",
+        "filed": {
+            "category": ,
+            "cloth_type": ,
+            "color": ,
+            "temp": ,
+            "sex": ,
+        }
+    }
+]

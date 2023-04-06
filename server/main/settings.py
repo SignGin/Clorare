@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'weatherdata',
     'corsheaders',
+    'django_seed',
 ]
 
 MIDDLEWARE = [

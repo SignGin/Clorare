@@ -6,44 +6,52 @@
 
 1. 파이썬 설치
 
-2. cmd에서 venv 폴더가 있는 위치로 이동
-
-3. venv\Scripts\activate.bat 실행(가상환경 실행)
-
-4. python manage.py runserver 실행(서버 실행)
-
-5. 에러난다면 mysql 확인
-   사용자이름: root
-   패스워드: rootuser
-
-사용자이름과 패스워드에 불만이라면 settings.py파일에서 수정
-
----
-
-1. 파이썬 설치
-
 2. cmd에서 server 폴더로 이동
 
-3. python -m venv venv 실행해서 가상환경 생성
+3. 키 파일 생성
+   + server 폴더에 secrets.json 파일 생성 (비밀키 파일)
 
-4. venv\Scripts\activate.bat 입력(가상환경 실행)
+4. 가상환경 생성
+   + cmd 입력</br>
+      python -m venv venv
 
-5. 가상환경에 필요 모듈 설치
+5. 가상환경 실행
+   + cmd 입력</br>
+      venv\Scripts\activate.bat
 
-pip install django
-pip install djangorestframework
-pip install mysqlclient
+6. 가상환경에 필요 모듈 설치
+   + cmd 입력</br>
+      pip install django
+      pip install djangorestframework
+      pip install mysqlclient
+      pip install django-cors-header
+      pip install django-seed
+      pip install psycopg2
 
-6. python manage.py runserver 입력(서버 실행)
+7. 모델 적용
+   + cmd 입력</br>
+      python manage.py makemigrations
+      python manage.py migrate
 
-p. 에러난다면 mysql 확인
-사용자이름: root
-패스워드: rootuser
+8. 시드 적용
+   + cmd 입력</br>
+      python manage.py add_data
 
-사용자이름과 패스워드에 불만이라면 settings.py파일에서 수정
+9. 서버 실행
+   + cmd 입력</br>
+      python manage.py runserver 입력(서버 실행)
 
----
+</br></br>
 
-demo 라는 이름의 스키마 생성
-python manage.py migrate 실행
-그 후에 python manage.py runserver로 서버 시작
+## 에러 발생시
+   + mysql 확인</br>
+      사용자이름: root</br>
+      패스워드: rootuser</br>
+      혹은 settings.py 파일에서 해당 부분을 찾아 본인에 맞게 수정
+   
+   + secrets.json 파일 확인</br>
+      해당 파일이 존재하지 않거나 내용이 적합하지 않다면 실행 불가능
+
+   + psycopg2 설치 확인</br>
+      설치하지 않았다면 8번의 시드 적용 과정 중 에러 발생 가능성
+   

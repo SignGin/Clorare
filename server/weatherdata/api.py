@@ -32,7 +32,7 @@ def get_weather():
     # print(w_data["name"],"의 날씨입니다.")
     # print("날씨는 ",w_data["weather"][0]["description"],"입니다.")
     # print("현재 온도는 ",w_data["main"]["temp"],"입니다.")
-    print("하지만 체감 ",w_data["main"]["feels_like"],"일 거에요.")
+    # print("하지만 체감 ",w_data["main"]["feels_like"],"일 거에요.")
     # print("최저 기온은 ",w_data["main"]["temp_min"],"입니다.")
     # print("최고 기온은 ",w_data["main"]["temp_max"],"입니다.")
     # print("습도는 ",w_data["main"]["humidity"],"입니다.")

@@ -54,18 +54,18 @@ def request_reco(request, sex):
     if request.method == 'GET':
         w_data = get_weather()
         if w_data["main"]["feels_like"] < 16:
-            temp = 0
+            temp = 0  # 추움
         elif w_data["main"]["feels_like"] < 22:
-            temp = 1
+            temp = 1  # 조금 추움
         elif w_data["main"]["feels_like"] < 27:
-            temp = 2
+            temp = 2  # 적당함
         elif w_data["main"]["feels_like"] >= 27:
-            temp = 3
+            temp = 3  # 더움
         else:
             pass
 
         obj_0 = Clothes.objects.filter(Q(sex=sex) | Q(sex=2)).filter(Q(category=0) & Q(temp=temp)).values()[0]
-        obj_1 = Clothes.objects.filter(Q(sex=sex) | Q(sex=2)).filter(Q(category=0) & Q(temp=temp)).values()[0]
+        obj_1 = Clothes.objects.filter(Q(sex=sex) | Q(sex=2)).filter(Q(category=1) & Q(temp=temp)).values()[0]
 
         context = {
             'top': obj_0,
@@ -73,15 +73,13 @@ def request_reco(request, sex):
             'w_data': w_data["weather"][0]["main"],
             'w_temp': w_data["main"]["temp"],
             'w_feels_like': w_data["main"]["feels_like"],
-            'w_daily_range': w_data["main"]["temp_max"]-w_data["main"]["temp_min"],
+            'w_daily_range': w_data["main"]["temp_max"] - w_data["main"]["temp_min"],
             'w_humidity': w_data["main"]["humidity"],
             'w_wind_speed': w_data["wind"]["speed"],
         }
 
         print(json.dumps(context))
         return JsonResponse(context, safe='False')
-        # serializer = ClothesSerializer(obj, many=True)
-        # return JsonResponse(serializer.data, safe=False)
 
     elif request.method == 'PUT':
         data = JSONParser().parse(request)
@@ -95,7 +93,3 @@ def request_reco(request, sex):
     elif request.method == 'DELETE':
         obj.delete()
         return HttpResponse(status=204)
-
-
-
-

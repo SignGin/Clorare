@@ -24,17 +24,24 @@
       pip install django
       pip install djangorestframework
       pip install mysqlclient
+      pip install django-cors-header
+      pip install django-seed
+      pip install psycopg2
 
 7. 모델 적용
    cmd 입력
       python manage.py makemigrations
       python manage.py migrate
 
-8. 서버 실행
+8. 시드 적용
+   cmd 입력
+      python manage.py add_data
+
+9. 서버 실행
    cmd 입력
       python manage.py runserver 입력(서버 실행)
 
-9. 에러 발생시
+10. 에러 발생시
    mysql 확인
       사용자이름: root
       패스워드: rootuser
@@ -43,3 +50,7 @@
    
    secrets.json 파일 확인
       해당 파일이 존재하지 않거나 내용이 적합하지 않다면 실행 불가능
+
+   psycopg2 설치 확인
+      설치하지 않았다면 8번 시드 적용 중 에러 발생 가능성
+   

@@ -21,16 +21,11 @@
 
 6. 가상환경에 필요 모듈 설치
    + cmd 입력</br>
-      pip install django
-      pip install djangorestframework
-      pip install mysqlclient
-      pip install django-cors-header
-      pip install django-seed
-      pip install psycopg2
+      pip install django djangorestframework mysqlclient django-cors-header django-seed psycopg2 requests
 
 7. 모델 적용
    + cmd 입력</br>
-      python manage.py makemigrations
+      python manage.py makemigrations</br>
       python manage.py migrate
 
 8. 시드 적용

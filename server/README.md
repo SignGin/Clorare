@@ -36,11 +36,6 @@
    + cmd 입력</br>
       python manage.py runserver 입력(서버 실행)
 
-10. 에러 발생시
-   + mysql 확인</br>
-      사용자이름: root </br>
-      패스워드: rootuser
-
 </br></br>
 
 ## 에러 발생시

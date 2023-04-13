@@ -57,8 +57,6 @@ def request_cloth(request, pk):
 @permission_classes((permissions.AllowAny,))
 @csrf_exempt
 def request_reco(request, sex):
-    obj = Clothes.objects.all()
-
     if request.method == 'GET':
         w_data = get_weather()
         if w_data["main"]["feels_like"] < 16:
@@ -79,10 +77,12 @@ def request_reco(request, sex):
             'top': {
                 'cloth_type': obj_0['cloth_type'],
                 'color': obj_0['color'],
+                'image': "/media" + obj_0['image'],
             },
             'bot': {
                 'cloth_type': obj_1['cloth_type'],
                 'color': obj_1['color'],
+                'image': "/media" + obj_1['image'],
             },
             'w_data': w_data["weather"][0]["main"],
             'w_temp': w_data["main"]["temp"],

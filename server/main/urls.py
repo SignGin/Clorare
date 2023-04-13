@@ -4,14 +4,16 @@ from restapi import views
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from rest_framework.permissions import AllowAny
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="제목",
-        default_version='v1',
-        description="설명",
-        terms_of_service="https://www.google.com/policies/terms/",
+        title="Cloth Random Recommendation",
+        default_version='v1.1',
+        description="# 오늘 날씨에 따라 랜덤으로 옷을 추천해드립니다.",
+        terms_of_service="",
     ),
     public=True,
     permission_classes=(AllowAny,),
@@ -35,3 +37,5 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

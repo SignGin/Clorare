@@ -30,6 +30,9 @@ def get_secret(setting):
 
 SECRET_KEY = get_secret("SECRET_KEY")
 
+MEDIA_ROOT = os.path.join(__file__, '../media')
+MEDIA_URL = '/media/'
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 

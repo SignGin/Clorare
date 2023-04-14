@@ -7,7 +7,7 @@ class Clothes(models.Model):
     color = models.CharField(max_length=16)  # 옷 색
     temp = models.IntegerField()  # 기온
     sex = models.IntegerField()  # 성별
-    image = models.ImageField(upload_to='clothes', null=True)
+    image = models.ImageField(upload_to='clothes')
 
     class Meta:
         ordering = ['?']

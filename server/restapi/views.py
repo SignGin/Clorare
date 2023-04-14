@@ -84,6 +84,7 @@ def request_reco(request, sex):
                 'color': obj_1['color'],
                 'image': "/media" + obj_1['image'],
             },
+            'sex': sex,
             'w_data': w_data["weather"][0]["main"],
             'w_temp': w_data["main"]["temp"],
         }

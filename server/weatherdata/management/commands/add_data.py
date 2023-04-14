@@ -30,24 +30,24 @@ class Command(BaseCommand):
             [0, 'stripe shirt', 'navy', 3, 2, '/clothes/cat.jpg'],
             [0, 'a sleeveless shirt', 'white', 3, 2, '/clothes/cat.jpg'],
 
-            [1, 'jeans', 'blue', 0, 2, '/clothes/navy.jpg'],
-            [1, 'jeans', 'navy', 0, 2, '/clothes/navy.jpg'],
+            [1, 'jeans', 'blue', 0, 2, '/clothes/paper.jpg'],
+            [1, 'jeans', 'navy', 0, 2, '/clothes/paper.jpg'],
 
-            [1, 'jeans', 'blue', 1, 2, '/clothes/navy.jpg'],
-            [1, 'jeans', 'navy', 1, 2, '/clothes/navy.jpg'],
-            [1, 'pants', 'white', 1, 2, '/clothes/navy.jpg'],
-            [1, 'pants', 'yellow', 1, 2, '/clothes/navy.jpg'],
-            [1, 'slacks', 'black', 1, 2, '/clothes/navy.jpg'],
+            [1, 'jeans', 'blue', 1, 2, '/clothes/paper.jpg'],
+            [1, 'jeans', 'navy', 1, 2, '/clothes/paper.jpg'],
+            [1, 'pants', 'white', 1, 2, '/clothes/paper.jpg'],
+            [1, 'pants', 'yellow', 1, 2, '/clothes/paper.jpg'],
+            [1, 'slacks', 'black', 1, 2, '/clothes/paper.jpg'],
 
-            [1, 'pants', 'white', 2, 2, '/clothes/navy.jpg'],
-            [1, 'pants', 'yellow', 2, 2, '/clothes/navy.jpg'],
-            [1, 'shorts', 'black', 2, 2, '/clothes/navy.jpg'],
-            [1, 'slacks', 'black', 2, 2, '/clothes/navy.jpg'],
+            [1, 'pants', 'white', 2, 2, '/clothes/paper.jpg'],
+            [1, 'pants', 'yellow', 2, 2, '/clothes/paper.jpg'],
+            [1, 'shorts', 'black', 2, 2, '/clothes/paper.jpg'],
+            [1, 'slacks', 'black', 2, 2, '/clothes/paper.jpg'],
 
-            [1, 'dolphin shorts', 'navy', 3, 0, '/clothes/navy.jpg'],
-            [1, 'shorts', 'black', 3, 2, '/clothes/navy.jpg'],
-            [1, 'skirt', 'red', 3, 0, '/clothes/navy.jpg'],
-            [1, 'skirt', 'pink', 3, 0, '/clothes/navy.jpg'],
+            [1, 'dolphin shorts', 'navy', 3, 0, '/clothes/paper.jpg'],
+            [1, 'shorts', 'black', 3, 2, '/clothes/paper.jpg'],
+            [1, 'skirt', 'red', 3, 0, '/clothes/paper.jpg'],
+            [1, 'skirt', 'pink', 3, 0, '/clothes/paper.jpg'],
         ]
 
         for i in range(len(data_arr)):

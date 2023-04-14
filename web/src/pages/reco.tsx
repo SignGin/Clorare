@@ -1,6 +1,8 @@
-import { useCallback, useEffect, useState } from 'react';
-import AppLayout from '@/components/AppLayout';
+import { useCallback, useState } from 'react';
 import axios from 'axios';
+import Image from 'next/image';
+import AppLayout from '@/components/AppLayout';
+import { serverDomain } from '@/utils/constants';
 
 enum gender {
   female = 0,
@@ -9,27 +11,17 @@ enum gender {
 
 interface ClothesData {
   top: {
-    id: number;
-    category: number;
     cloth_type: string;
     color: string;
-    temp: number;
-    sex: number;
+    image: string;
   };
   bot: {
-    id: number;
-    category: number;
     cloth_type: string;
     color: string;
-    temp: number;
-    sex: number;
+    image: string;
   };
-  w_daily_range: number;
   w_data: string;
-  w_feels_like: number;
-  w_humidity: number;
   w_temp: number;
-  w_wind_speed: number;
   gender: gender;
 }
 
@@ -120,7 +112,14 @@ function Recomend() {
                 <h2>{clothesData.top.color}</h2>
                 <h2>{clothesData.top.cloth_type}</h2>
               </div>
-              <img src="https://picsum.photos/200/300" alt="dummy-img" />
+              <div>
+                <Image
+                  src={`${serverDomain}${clothesData.top.image}`}
+                  alt="dummy-img"
+                  width={500}
+                  height={500}
+                />
+              </div>
             </div>
           ) : null}
           {clothesData?.bot ? (
@@ -130,7 +129,14 @@ function Recomend() {
                 <h2>{clothesData.bot.color}</h2>
                 <h2>{clothesData.bot.cloth_type}</h2>
               </div>
-              <img src="https://picsum.photos/200/300" alt="dummy-img" />
+              <div>
+                <Image
+                  src={`${serverDomain}${clothesData.bot.image}`}
+                  alt="dummy-img"
+                  width={500}
+                  height={500}
+                />
+              </div>
             </div>
           ) : null}
         </div>

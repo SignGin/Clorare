@@ -57,18 +57,21 @@ def request_cloth(request, pk):
 @permission_classes((permissions.AllowAny,))
 @csrf_exempt
 def request_reco(request, sex):
-    if request.method == 'GET':
+    if request.method == 'GET' and (sex == 0 or sex == 1):
         w_data = get_weather()
-        if w_data["main"]["feels_like"] < 16:
-            temp = 0  # 추움
-        elif w_data["main"]["feels_like"] < 22:
-            temp = 1  # 조금 추움
-        elif w_data["main"]["feels_like"] < 27:
-            temp = 2  # 적당함
-        elif w_data["main"]["feels_like"] >= 27:
-            temp = 3  # 더움
+        if w_data != 999:
+            if w_data["main"]["feels_like"] < 16:
+                temp = 0  # 추움
+            elif w_data["main"]["feels_like"] < 22:
+                temp = 1  # 조금 추움
+            elif w_data["main"]["feels_like"] < 27:
+                temp = 2  # 적당함
+            elif w_data["main"]["feels_like"] >= 27:
+                temp = 3  # 더움
+            else:
+                pass
         else:
-            pass
+            return JsonResponse({"MESSAGE": "Error, Please Check Api Settings"}, status=404)
 
         obj_0 = Clothes.objects.filter(Q(sex=sex) | Q(sex=2)).filter(Q(category=0) & Q(temp=temp)).values()[0]
         obj_1 = Clothes.objects.filter(Q(sex=sex) | Q(sex=2)).filter(Q(category=1) & Q(temp=temp)).values()[0]
@@ -91,6 +94,13 @@ def request_reco(request, sex):
 
         print(json.dumps(context))
         return JsonResponse(context, safe='False')
+
+    elif sex != 0 and sex != 1:
+        return JsonResponse({"MESSAGE": "Error, Unknown Gender Value"}, status=401)
+
+    else:
+        return JsonResponse({"MESSAGE": "Error, Please try again"}, status=404)
+
 
 
 @api_view(['GET'])

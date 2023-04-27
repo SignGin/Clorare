@@ -48,6 +48,17 @@ class Command(BaseCommand):
             [1, 'shorts', 'black', 3, 2, '/clothes/paper.jpg'],
             [1, 'skirt', 'red', 3, 0, '/clothes/paper.jpg'],
             [1, 'skirt', 'pink', 3, 0, '/clothes/paper.jpg'],
+
+            [2, 'coat', 'black', 0, 2, '/clothes/paper.jpg'],
+            [2, 'padded coat', 'black', 0, 2, '/clothes/paper.jpg'],
+
+            [2, 'jumper', 'black', 1, 2, '/clothes/paper.jpg'],
+            [2, 'jacket', 'black', 1, 2, '/clothes/paper.jpg'],
+
+            [2, 'waistcoat', 'black', 2, 2, '/clothes/paper.jpg'],
+            [2, 'cardigan', 'black', 2, 2, '/clothes/paper.jpg'],
+
+            [2, 'none', 'none', 3, 2, '/clothes/paper.jpg'],
         ]
 
         for i in range(len(data_arr)):

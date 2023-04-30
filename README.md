@@ -41,7 +41,7 @@
 **기획 및 제작** : 이유찬(Front-end), 주기현(Back-end)<br>
 **분류** : Clorare Project (2인 협업) <br>
 **주요 기능** : 현재 날씨에 따른 옷 랜덤추천 기능 <br>
-**사용 툴** : Python, Django, MySQL, JavaScript 
+**사용 툴** : Python, Django, MySQL, JavaScript, Next.js
 
 ## **1. 프로젝트를 기획한 이유**
 >**날씨를 확인하기 힘들거나 매일 어떤 옷을 입어야 할 지 고민이 될 때!** <br>

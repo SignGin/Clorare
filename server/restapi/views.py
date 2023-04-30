@@ -37,7 +37,7 @@ def request_cloth(request, pk):
     try:
         obj = Clothes.objects.get(pk=pk)
     except ObjectDoesNotExist:
-        return JsonResponse({"MESSAGE": "Error, Unknown Value"}, status=401)
+        return JsonResponse({"MESSAGE": "Error, Please Check DB"}, status=401)
 
     if request.method == 'GET':
         serializer = ClothesSerializer(obj)
@@ -118,7 +118,10 @@ def request_reco(request, sex):
 @csrf_exempt
 def request_weather(request):
     if request.method == 'GET':
-        w_data = get_weather()
+        try:
+            w_data = get_weather()
+        except:
+            return JsonResponse({"MESSAGE": "Error, Please Check Api Setting"}, status=401)
 
         context = {
             'w_data': w_data["weather"][0]["main"],

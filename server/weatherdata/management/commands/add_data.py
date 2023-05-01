@@ -61,15 +61,18 @@ class Command(BaseCommand):
             [2, 'none', 'none', 3, 2, '/clothes/paper.jpg'],
         ]
 
-        for i in range(len(data_arr)):
-            seeder.add_entity(Clothes, number, {
-                'category': data_arr[i][0],
-                'cloth_type': data_arr[i][1],
-                'color': data_arr[i][2],
-                'temp': data_arr[i][3],
-                'sex': data_arr[i][4],
-                'image': data_arr[i][5],
-            })
+        try:
+            for i in range(len(data_arr)):
+                seeder.add_entity(Clothes, number, {
+                    'category': data_arr[i][0],
+                    'cloth_type': data_arr[i][1],
+                    'color': data_arr[i][2],
+                    'temp': data_arr[i][3],
+                    'sex': data_arr[i][4],
+                    'image': data_arr[i][5],
+                })
+        except:
+            print(f"Failed to add data")
 
         seeder.execute()
-        print(f"Add {len(data_arr)} clothes data!!")
+        print(f"Successfully added {len(data_arr)} clothes data!!")

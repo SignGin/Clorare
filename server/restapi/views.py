@@ -16,18 +16,23 @@ from django.http import HttpResponse
 @permission_classes((permissions.AllowAny,))
 @csrf_exempt
 def request_api(request):
-    if request.method == 'GET':
-        query_set = Clothes.objects.all()
-        serializer = ClothesSerializer(query_set, many=True)
-        return JsonResponse(serializer.data, safe=False)
+    try:
+        if request.method == 'GET':
+            query_set = Clothes.objects.all()
+            serializer = ClothesSerializer(query_set, many=True)
+            return JsonResponse(serializer.data, safe=False)
 
-    elif request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = ClothesSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data, status=201)
-        return JsonResponse(serializer.errors, status=400)
+        elif request.method == 'POST':
+            data = JSONParser().parse(request)
+            serializer = ClothesSerializer(data=data)
+            if serializer.is_valid():
+                serializer.save()
+                return JsonResponse(serializer.data, status=201)
+            return JsonResponse(serializer.errors, status=400)
+    except:
+        return JsonResponse({"MESSAGE": "Error, Please Check DB"}, status=401)
+
+
 
 
 @api_view(['GET', 'DELETE'])

@@ -8,7 +8,7 @@ class Clothes(models.Model):
     max_temp = models.IntegerField()
     min_temp = models.IntegerField()
     gender = models.CharField(max_length=6)  # 여성, 남성, 무관
-    image = models.ImageField(upload_to='clothes', null=True)
+    image = models.ImageField(upload_to='clothes', null=True, blank=True)
 
     def __str__(self):
         return self.cloth_type

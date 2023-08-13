@@ -23,11 +23,11 @@ urlpatterns = [
     # 옷 목록 조회
     path('', views.ClothesList.as_view(), name='list'),
     # 특정 번호의 옷 오브젝트 조회
-    # path('<int:pk>/', views.ClothesDetail.as_view(), name='delete'),
+    path('<int:pk>/', views.ClothesDetail.as_view(), name='delete'),
     # 특정 번호의 옷 오브젝트 삭제
-    # path('<int:pk>/delete/', views.ClothesDelete.as_view(), name='delete'),
+    path('delete/<int:pk>/', views.ClothesDelete.as_view(), name='delete'),
     # 모델에 옷 오브젝트 추가
-    # path('add/', views.ClothesAdd.as_view(), name='add'),
+    path('add/', views.ClothesAdd.as_view(), name='add'),
     # 옷 랜덤 추천
     # path('recp/', views.ClothesRecommendation.as_view(), name='reco'),
 

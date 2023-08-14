@@ -1,7 +1,6 @@
 from django.db import models
 
 
-# Create your models here.
 class Clothes(models.Model):
     category = models.CharField(max_length=10)  # ex) 상의, 하의
     cloth_type = models.CharField(max_length=10)  # ex) 티셔츠, 니트

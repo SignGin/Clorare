@@ -1,28 +1,11 @@
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import { motion } from 'framer-motion';
 
 import AppLayout from '@/components/AppLayout';
-import { FakePhoto } from '@/types/fakeApi';
 import { motionVariants } from '@/utils/motion';
 import Link from 'next/link';
-import MainIntroduce from '@/components/MainIntroduce ';
-
-const photoApi = async (): Promise<FakePhoto> => {
-  const data = await axios.get('https://jsonplaceholder.typicode.com/photos/2');
-  return data.data;
-};
+import MainIntroduce from '@/components/MainIntroduce';
 
 export default function Home({ randomBgColor }: { randomBgColor: string }) {
-  const { data, isLoading } = useQuery({
-    queryKey: ['photos'],
-    queryFn: photoApi,
-  });
-
-  if (isLoading) {
-    <div>..... Loading</div>;
-  }
-
   return (
     <AppLayout>
       <div
@@ -31,30 +14,47 @@ export default function Home({ randomBgColor }: { randomBgColor: string }) {
         <h1 className="text-2xl my-4">
           Clothing recommendation service according to the weather
         </h1>
-        {/* <Link
+        <div className="flex flex-row space-x-2">
+          {/* <Link
           href="/node"
           className="border-4 border-orange-700 hover:border-orange-900 hover:bg-slate-50 p-1 rounded-md"
         >
           Node 데모 서버
         </Link> */}
-        <Link
-          href="/reco"
-          className="border-4 border-orange-700 hover:border-orange-900 hover:bg-slate-50 p-1 rounded-md"
-        >
-          Let's Go ~!
-        </Link>
+          <Link
+            href="/reco"
+            className="border-4 border-orange-700 hover:border-orange-900 hover:bg-slate-50 p-1 rounded-md"
+          >
+            Let's Go ~!
+          </Link>
+          <Link
+            href="/clothes/add"
+            className="border-4 border-orange-700 hover:border-orange-900 hover:bg-slate-50 p-1 rounded-md"
+          >
+            add clothes
+          </Link>
+        </div>
+
         <div className="h-full">
-          {data ? (
-            <motion.div
-              className="flex flex-col items-center py-4"
-              initial="offscreen"
-              whileInView="onscreen"
-              whileHover="onhover"
-            >
-              <motion.img src={data.url} alt="img" variants={motionVariants} />
-              <p>{data.title}</p>
-            </motion.div>
-          ) : null}
+          <motion.div
+            className="flex flex-col items-center py-4"
+            initial="offscreen"
+            whileInView="onscreen"
+            whileHover="onhover"
+          >
+            <motion.img
+              src="/landing_Image.jpg"
+              alt="img"
+              variants={motionVariants}
+              width="600"
+              className="border-2 border-zinc-900"
+            />
+            <p>
+              <strong>
+                "옷은 우리의 말없는 언어, 스타일은 우리의 은밀한 메시지입니다."
+              </strong>
+            </p>
+          </motion.div>
         </div>
         <MainIntroduce />
       </div>

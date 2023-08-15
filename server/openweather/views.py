@@ -6,6 +6,13 @@ from .serializers import WeatherSerializer
 from .openweatherapi import open_weather_api
 
 
+class WeatherList(APIView):
+    def get(self, request):
+        weather = Weather.objects.all()
+        serializer = WeatherSerializer(weather, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
 class WeatherRequest(APIView):
     def get(self, request):
         serializer = WeatherSerializer(data=open_weather_api())

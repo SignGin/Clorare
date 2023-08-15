@@ -1,28 +1,11 @@
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import { motion } from 'framer-motion';
 
 import AppLayout from '@/components/AppLayout';
-import { FakePhoto } from '@/types/fakeApi';
 import { motionVariants } from '@/utils/motion';
 import Link from 'next/link';
-import MainIntroduce from '@/components/MainIntroduce ';
-
-const photoApi = async (): Promise<FakePhoto> => {
-  const data = await axios.get('https://jsonplaceholder.typicode.com/photos/2');
-  return data.data;
-};
+import MainIntroduce from '@/components/MainIntroduce';
 
 export default function Home({ randomBgColor }: { randomBgColor: string }) {
-  const { data, isLoading } = useQuery({
-    queryKey: ['photos'],
-    queryFn: photoApi,
-  });
-
-  if (isLoading) {
-    <div>..... Loading</div>;
-  }
-
   return (
     <AppLayout>
       <div
@@ -44,17 +27,25 @@ export default function Home({ randomBgColor }: { randomBgColor: string }) {
           Let's Go ~!
         </Link>
         <div className="h-full">
-          {data ? (
-            <motion.div
-              className="flex flex-col items-center py-4"
-              initial="offscreen"
-              whileInView="onscreen"
-              whileHover="onhover"
-            >
-              <motion.img src={data.url} alt="img" variants={motionVariants} />
-              <p>{data.title}</p>
-            </motion.div>
-          ) : null}
+          <motion.div
+            className="flex flex-col items-center py-4"
+            initial="offscreen"
+            whileInView="onscreen"
+            whileHover="onhover"
+          >
+            <motion.img
+              src="/landing_Image.jpg"
+              alt="img"
+              variants={motionVariants}
+              width="600"
+              className="border-2 border-zinc-900"
+            />
+            <p>
+              <strong>
+                "옷은 우리의 말없는 언어, 스타일은 우리의 은밀한 메시지입니다."
+              </strong>
+            </p>
+          </motion.div>
         </div>
         <MainIntroduce />
       </div>

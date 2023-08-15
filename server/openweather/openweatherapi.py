@@ -11,6 +11,7 @@ def open_weather_api():
     weather = json.loads(result.text)
 
     weather_data = {
+        "weather": weather["weather"][0]["main"],
         "temperature": weather["main"]["temp"],
         "feels_like": weather["main"]["feels_like"],
         "daily_high": weather["main"]["temp_max"],

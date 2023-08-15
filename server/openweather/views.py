@@ -12,5 +12,4 @@ class WeatherRequest(APIView):
 
         if serializer.is_valid():
             weather_data = serializer.save()
-            print("시리얼라이저", serializer.data)
             return Response(serializer.data, status=status.HTTP_201_CREATED)

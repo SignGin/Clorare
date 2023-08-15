@@ -2,6 +2,7 @@ from django.db import models
 
 
 class Weather(models.Model):
+    weather = models.CharField(max_length=16)
     temperature = models.FloatField()
     feels_like = models.FloatField()
     daily_high = models.FloatField()

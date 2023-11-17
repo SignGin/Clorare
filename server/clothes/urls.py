@@ -1,17 +1,13 @@
-from django.urls import path, include
-from . import views
+from django.urls import path
+from .views import ClothesView, ClothesDetailView
 
 app_name = 'clothes'
 
 urlpatterns = [
-    # 옷 목록 조회
-    path('', views.ClothesList.as_view(), name='list'),
-    # 특정 번호의 옷 오브젝트 조회
-    path('<int:pk>/', views.ClothesDetail.as_view(), name='delete'),
-    # 특정 번호의 옷 오브젝트 삭제
-    path('delete/<int:pk>/', views.ClothesDelete.as_view(), name='delete'),
-    # 모델에 옷 오브젝트 추가
-    path('add/', views.ClothesAdd.as_view(), name='add'),
+    # 옷 목록 조회, 추가
+    path('', ClothesView.as_view()),
+    # 특정 옷 조회, 수정, 삭제
+    path('<int:pk>/', ClothesDetailView.as_view()),
     # 옷 랜덤 추천
-    # path('reco/', views.ClothesRecommendation.as_view(), name='reco'),
+    # path('reco/', views.ClothesRecommendationView.as_view()),
 ]

@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import ClothesView, ClothesDetailView
+from .views import ClothesView, ClothesDetailView, ClothesRecommendationView
 
 app_name = 'clothes'
 
@@ -9,5 +9,5 @@ urlpatterns = [
     # 특정 옷 조회, 수정, 삭제
     path('<int:pk>/', ClothesDetailView.as_view()),
     # 옷 랜덤 추천
-    # path('reco/', views.ClothesRecommendationView.as_view()),
+    path('reco/<int:gender>/', ClothesRecommendationView.as_view()),
 ]

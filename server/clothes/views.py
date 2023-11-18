@@ -1,8 +1,14 @@
+import os, sys
+from django.db.models import Q
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from .models import Clothes
 from .serializers import ClothesSerializer
+
+p = os.path.abspath('.') + r'\openweather'
+sys.path.insert(1, p)
+from openweatherapi import open_weather_api
 
 
 # Create your views here.
@@ -38,3 +44,18 @@ class ClothesDetailView(APIView):
         queryset = Clothes.objects.get(pk=pk)
         queryset.delete()
         return Response({'message': 'Cloth deleted'}, status=status.HTTP_202_ACCEPTED)
+
+
+class ClothesRecommendationView(APIView):
+    def get(self, request, gender):
+        weather_data = open_weather_api()
+        # print(weather_data)
+
+        queryset = Clothes.objects.exclude(gender=1-int(gender))
+        cloth_top = queryset.filter(
+            Q(category='top') &
+            Q(max_temp__gte=weather_data["temperature"]) &
+            Q(min_temp__lte=weather_data["temperature"])
+        )
+        serializer = ClothesSerializer(cloth_top, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)

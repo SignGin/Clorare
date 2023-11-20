@@ -48,14 +48,23 @@ class ClothesDetailView(APIView):
 
 class ClothesRecommendationView(APIView):
     def get(self, request, gender):
+        gender_str = ["female", "male", "unisex"]
         weather_data = open_weather_api()
         # print(weather_data)
 
-        queryset = Clothes.objects.exclude(gender=1-int(gender))
+        if weather_data["temperature"] >= 30:
+            season = "summer"
+        elif weather_data["temperature"] >= 20:
+            season = "autumn"
+        elif weather_data["temperature"] >= 10:
+            season = "spring"
+        else:
+            season = "winter"
+
+        queryset = Clothes.objects.exclude(gender=gender_str[1-int(gender)])
         cloth_top = queryset.filter(
             Q(category='top') &
-            Q(max_temp__gte=weather_data["temperature"]) &
-            Q(min_temp__lte=weather_data["temperature"])
+            Q(season=season)
         )
         serializer = ClothesSerializer(cloth_top, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)

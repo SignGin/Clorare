@@ -8,14 +8,19 @@ class Clothes(models.Model):
         ('coat', '외투')
     ]
     GENDER = [
-        ('0', '여자'),
-        ('1', '남자'),
-        ('2', '공용')
+        ('female', '여자'),
+        ('male', '남자'),
+        ('unisex', '공용')
     ]
-    category = models.CharField(max_length=10, choices=CATEGORY)  # ex) 상의, 하의
-    cloth_type = models.CharField(max_length=10)  # ex) 티셔츠, 니트
-    max_temp = models.IntegerField()
-    min_temp = models.IntegerField()
+    SEASON = [
+        ('spring', '봄'),
+        ('summer', '여름'),
+        ('autumn', '가을'),
+        ('winter', '겨울')
+    ]
+    category = models.CharField(max_length=6, choices=CATEGORY)  # ex) 상의, 하의
+    cloth_type = models.CharField(max_length=20)  # ex) 티셔츠, 니트
+    season = models.CharField(max_length=6, choices=SEASON)  # ex) 봄, 여름, 가을, 겨울
     gender = models.CharField(max_length=6, choices=GENDER)  # 여성, 남성, 무관
     image = models.ImageField(upload_to='clothes', null=True, blank=True)
 

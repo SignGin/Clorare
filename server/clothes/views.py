@@ -1,10 +1,9 @@
 import os, sys
-from django.db.models import Q
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from .models import Clothes
-from .serializers import ClothesSerializer
+from .serializers import ClothesSerializer, ClorareSerializer
 
 p = os.path.abspath('.') + r'\openweather'
 sys.path.insert(1, p)
@@ -50,7 +49,6 @@ class ClothesRecommendationView(APIView):
     def get(self, request, gender):
         gender_str = ["female", "male", "unisex"]
         weather_data = open_weather_api()
-        # print(weather_data)
 
         if weather_data["temperature"] >= 30:
             season = "summer"
@@ -62,9 +60,23 @@ class ClothesRecommendationView(APIView):
             season = "winter"
 
         queryset = Clothes.objects.exclude(gender=gender_str[1-int(gender)])
-        cloth_top = queryset.filter(
-            Q(category='top') &
-            Q(season=season)
-        )
-        serializer = ClothesSerializer(cloth_top, many=True)
+        queryset = queryset.filter(season=season)
+
+        cloth_top = queryset.filter(category="top").order_by("?").first()
+        cloth_bottom = queryset.filter(category="bottom").order_by("?").first()
+        cloth_coat = queryset.filter(category="coat").order_by("?").first()
+
+        serialized_top = ClothesSerializer(cloth_top).data
+        serialized_bottom = ClothesSerializer(cloth_bottom).data
+        serialized_coat = ClothesSerializer(cloth_coat).data
+
+        context = {
+            "top": serialized_top,
+            "bot": serialized_bottom,
+            "coat": serialized_coat,
+            "gender": gender_str[gender],
+            "w_data": weather_data
+        }
+
+        serializer = ClorareSerializer(context)
         return Response(serializer.data, status=status.HTTP_200_OK)

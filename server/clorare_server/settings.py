@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'dotenv',
+    'drf_yasg',
     'rest_framework',
     'clothes',
     'openweather',

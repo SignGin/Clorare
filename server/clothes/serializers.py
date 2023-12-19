@@ -9,9 +9,8 @@ class ClothesSerializer(serializers.ModelSerializer):
 
 
 class ClorareSerializer(serializers.Serializer):
-    top = serializers.JSONField(allow_null=True)
-    bot = serializers.JSONField(allow_null=True)
+    top = serializers.JSONField()
+    bot = serializers.JSONField()
     coat = serializers.JSONField(allow_null=True)
     gender = serializers.CharField(max_length=6)
     w_data = serializers.JSONField()
-    

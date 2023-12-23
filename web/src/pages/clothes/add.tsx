@@ -2,6 +2,8 @@ import { ErrorMessage, Field, Formik } from 'formik';
 import { ErrorClothes, PostClothes } from '@/types/postClothes';
 import axios from 'axios';
 import { Category, Gender, Season } from '@/types/enums';
+import { borderLinkStyle } from '@/styles';
+import Link from 'next/link';
 
 const formRequiredData = ['category', 'cloth_type', 'season', 'gender'];
 const seasons = ['spring', 'summer', 'autumn', 'winter'];
@@ -121,6 +123,14 @@ export default function Add() {
           </form>
         )}
       </Formik>
+      <div className="flex gap-5 mt-10 mb-5">
+        <div className={borderLinkStyle}>
+          <Link href={'/'}>Go Home</Link>
+        </div>
+        <div className={borderLinkStyle}>
+          <Link href={'/reco'}>Get Recommendation</Link>
+        </div>
+      </div>
     </div>
   );
 }

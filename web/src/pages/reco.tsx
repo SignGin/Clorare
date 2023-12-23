@@ -3,26 +3,47 @@ import axios from 'axios';
 import Image from 'next/image';
 import AppLayout from '@/components/AppLayout';
 import { serverDomain } from '@/utils/constants';
+import Link from 'next/link';
+import { borderLinkStyle } from '@/styles';
 
 enum gender {
   female = 0,
   male = 1,
+  unisex = 2,
 }
 
 interface ClothesData {
   top: {
-    cloth_type: string;
-    color: string;
-    image: string;
+    category: string | null;
+    cloth_type: string | null;
+    season: string | null;
+    gender: gender | null;
+    image: string | null;
   };
   bot: {
-    cloth_type: string;
-    color: string;
-    image: string;
+    category: string | null;
+    cloth_type: string | null;
+    season: string | null;
+    gender: gender | null;
+    image: string | null;
   };
-  w_data: string;
-  w_temp: number;
-  sex: gender;
+  coat: {
+    category: string | null;
+    cloth_type: string | null;
+    season: string | null;
+    gender: gender | null;
+    image: string | null;
+  };
+  w_data: {
+    weather: string | null;
+    temperature: number;
+    feels_like: number;
+    daily_high: number;
+    daily_low: number;
+    humidity: number;
+    wind_speed: number;
+  };
+  gender: gender;
 }
 
 const commonButton = 'p-4 m-4';
@@ -41,9 +62,7 @@ function Recomend() {
     }
     try {
       setIsLoading(true);
-      const result = await axios.get(
-        `http://127.0.0.1:8000/weatherdata/reco/${select}/`,
-      );
+      const result = await axios.get(`/clothes/reco/${select}/`);
       console.log(result.data);
       setClothesData({ ...result.data, gender: select });
     } catch (error) {
@@ -78,6 +97,16 @@ function Recomend() {
           >
             Male 👨
           </button>
+          <button
+            className={
+              commonButton +
+              ' ' +
+              (select === 2 ? activeButton : inActiveButton)
+            }
+            onClick={() => setSelect(gender.unisex)}
+          >
+            Unisex ✨
+          </button>
         </div>
         <button
           className={
@@ -93,12 +122,12 @@ function Recomend() {
         ) : (
           <div>
             {clothesData?.w_data &&
-            clothesData.w_temp &&
-            clothesData.sex !== null ? (
+            clothesData.w_data.temperature &&
+            clothesData.gender !== null ? (
               <div
                 className={
                   'w-fit border-2 my-2 mx-auto p-4 bg-white ' +
-                  (clothesData.sex === gender.male
+                  (clothesData.gender === gender.male
                     ? 'border-blue-700'
                     : 'border-rose-700')
                 }
@@ -106,14 +135,14 @@ function Recomend() {
                 <h2>
                   Hi! Today's{' '}
                   <strong className="text-rose-600">
-                    {clothesData.w_data}
+                    {clothesData.w_data.weather}
                   </strong>{' '}
                   !
                 </h2>
                 <h2>
                   And temperature is{' '}
                   <strong className="text-rose-600">
-                    {clothesData.w_temp} °C
+                    {clothesData.w_data.temperature} °C
                   </strong>
                 </h2>
               </div>
@@ -123,7 +152,7 @@ function Recomend() {
                 <div className="flex flex-row m-4 animate-[showUp_1s_ease-in-out]">
                   <div className="flex flex-col p-4 m-4 border-2 rounded border-orange-400 h-fit bg-white">
                     <h1 className="text-emerald-700 text-2xl">TOP 👔</h1>
-                    <h2>{clothesData.top.color}</h2>
+                    <h2>{clothesData.top.season}</h2>
                     <h2>{clothesData.top.cloth_type}</h2>
                   </div>
                   <div>
@@ -140,7 +169,7 @@ function Recomend() {
                 <div className="flex flex-row m-4 animate-[showUp_1s_ease-in-out]">
                   <div className="flex flex-col p-4 m-4 border-2 rounded border-orange-600 h-fit bg-white">
                     <h1 className="text-emerald-700 text-2xl">PANTS 👖</h1>
-                    <h2>{clothesData.bot.color}</h2>
+                    <h2>{clothesData.bot.season}</h2>
                     <h2>{clothesData.bot.cloth_type}</h2>
                   </div>
                   <div>
@@ -153,9 +182,34 @@ function Recomend() {
                   </div>
                 </div>
               ) : null}
+              {clothesData?.coat ? (
+                <div className="flex flex-row m-4 animate-[showUp_1s_ease-in-out]">
+                  <div className="flex flex-col p-4 m-4 border-2 rounded border-orange-400 h-fit bg-white">
+                    <h1 className="text-emerald-700 text-2xl">COAT 🦺</h1>
+                    <h2>{clothesData.coat.season}</h2>
+                    <h2>{clothesData.coat.cloth_type}</h2>
+                  </div>
+                  <div>
+                    <Image
+                      src={`${serverDomain}${clothesData.coat.image}`}
+                      alt="dummy-img"
+                      width={500}
+                      height={350}
+                    />
+                  </div>
+                </div>
+              ) : null}
             </div>
           </div>
         )}
+        <div className="flex gap-5 mt-10 mb-5">
+          <div className={borderLinkStyle}>
+            <Link href={'/'}>Go Home</Link>
+          </div>
+          <div className={borderLinkStyle}>
+            <Link href={'/clothes/add'}>Add Styles</Link>
+          </div>
+        </div>
       </div>
     </AppLayout>
   );

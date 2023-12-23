@@ -25,7 +25,7 @@
 6. 가상환경에 필요 모듈 설치
 
    - cmd 입력</br>
-     pip install django djangorestframework django-dotenv mysqlclient django-cors-headers django-seed psycopg2 requests drf-yasg pillow
+     pip install -r requirements.txt
 
 7. 모델 적용
 
@@ -36,7 +36,7 @@
 8. 시드 적용
 
    - cmd 입력</br>
-     python manage.py add_data
+     python manage.py add_data --total [원하는 데이터 수]
 
 9. 서버 실행
    - cmd 입력</br>
@@ -46,13 +46,5 @@
 
 ## 에러 발생시
 
-- mysql 확인</br>
-  사용자이름: root</br>
-  패스워드: rootuser</br>
-  혹은 settings.py 파일에서 해당 부분을 찾아 본인에 맞게 수정
-
 - .env 파일 확인</br>
   해당 파일이 존재하지 않거나 내용이 적합하지 않다면 실행 불가능
-
-- psycopg2 설치 확인</br>
-  설치하지 않았다면 8번의 시드 적용 과정 중 에러 발생 가능성

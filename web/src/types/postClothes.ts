@@ -1,19 +1,17 @@
-import { Gender } from './gender';
+import { Category, Gender, Season } from './enums';
 
 export interface PostClothes {
-  category: string;
+  category: Category;
   cloth_type: string;
-  max_temp: number;
-  min_temp: number;
+  season: Season;
   gender: Gender;
-  image?: null;
+  image?: string | null;
 }
 
 export interface ErrorClothes {
   category: string;
   cloth_type: string;
-  max_temp: string;
-  min_temp: string;
+  season: string;
   gender: string;
   image?: string;
 }

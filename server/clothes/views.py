@@ -14,7 +14,7 @@ from openweatherapi import open_weather_api
 # Request Parameter
 rp_id = openapi.Parameter('id', openapi.IN_PATH, type=openapi.TYPE_INTEGER,
                           description='cloth id')
-rp_gender = openapi.Parameter('id', openapi.IN_PATH, type=openapi.TYPE_INTEGER, enum=[0, 1, 2],
+rp_gender = openapi.Parameter('gender', openapi.IN_PATH, type=openapi.TYPE_INTEGER, enum=[0, 1, 2],
                               description='gender to wear cloth\nfemale=0\nmale=1\nunisex=2')
 
 # Cloth Model Schema

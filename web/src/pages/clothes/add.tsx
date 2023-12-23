@@ -74,7 +74,7 @@ export default function Add() {
         }}
         onSubmit={(values, actions) => {
           axios
-            .post('http://127.0.0.1:8000/clothes/add/', values)
+            .post('http://127.0.0.1:8000/clothes/', values)
             .then(res => {
               console.log('res', res);
               alert('추가 성공!');

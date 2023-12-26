@@ -8,7 +8,7 @@ from rest_framework import permissions
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="Clorare (Cloth Random Recommenation)",
+        title="Clorare (Cloth Random Recommendation)",
         default_version='Clorare v2',
         description="오늘 날씨에 따라 랜덤으로 옷을 추천해드립니다!",
         terms_of_service="",

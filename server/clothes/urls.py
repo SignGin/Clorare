@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import ClothesView, ClothesDetailView, ClothesRecommendationView
+from .views import ClothesView, ClothesDetailView, ClothesRecommendationView, get_csrf_token
 
 app_name = 'clothes'
 
@@ -10,4 +10,6 @@ urlpatterns = [
     path('<int:pk>/', ClothesDetailView.as_view()),
     # 옷 랜덤 추천
     path('reco/<int:gender>/', ClothesRecommendationView.as_view()),
+    # csrf-token
+    path('token/', get_csrf_token)
 ]

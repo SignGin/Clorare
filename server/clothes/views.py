@@ -1,4 +1,7 @@
 import os, sys
+
+from django.http import JsonResponse
+from django.middleware import csrf
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.views import APIView
@@ -11,6 +14,13 @@ from . import swagger as sw
 p = os.path.abspath('.') + r'\openweather'
 sys.path.insert(1, p)
 from openweatherapi import open_weather_api
+
+
+def get_csrf_token(request):
+    csrf_token = csrf.get_token(request)
+    response = JsonResponse({'message': 'CSRF Token 이 발급되었습니다.'})
+    response.set_cookie('csrftoken', csrf_token)
+    return response
 
 
 # Create your views here.

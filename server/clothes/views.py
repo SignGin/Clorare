@@ -16,11 +16,24 @@ sys.path.insert(1, p)
 from openweatherapi import open_weather_api
 
 
-def get_csrf_token(request):
-    csrf_token = csrf.get_token(request)
-    response = JsonResponse({'message': 'CSRF Token 이 발급되었습니다.'})
-    response.set_cookie('csrftoken', csrf_token)
-    return response
+class CSRFTokenView(APIView):
+    @swagger_auto_schema(
+        operation_id='CSRF-Token',
+        operation_description='Request CSRF-Token',
+        responses={
+            status.HTTP_200_OK: openapi.Response(
+                'Success', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
+                    'csrftoken': sw.csrf_token,
+                    'message': sw.sms_200
+                })
+            )
+        }
+    )
+    def get(self, request):
+        csrf_token = csrf.get_token(request)
+        response = JsonResponse({'message': 'CSRF Token 이 발급되었습니다.'})
+        response.set_cookie('csrftoken', csrf_token)
+        return response
 
 
 # Create your views here.

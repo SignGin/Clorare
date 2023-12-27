@@ -37,9 +37,15 @@ wms_wind_speed = openapi.Schema(type=openapi.TYPE_NUMBER,
                                 description='wind speed when you request')
 
 # System Message Schema
+sms_200 = openapi.Schema(type=openapi.TYPE_STRING,
+                         description='200 Success message')
 sms_202 = openapi.Schema(type=openapi.TYPE_STRING,
                          description='202 accepted message')
 sms_400 = openapi.Schema(type=openapi.TYPE_STRING,
                          description='400 error message')
 sms_500 = openapi.Schema(type=openapi.TYPE_STRING,
                          description='500 error message')
+
+# Header Schema
+csrf_token = openapi.Schema(type=openapi.IN_HEADER,
+                       description='CSRF-Token')

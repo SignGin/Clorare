@@ -19,6 +19,30 @@ export default function Add() {
     image: null,
   };
 
+  const convertToBase64 = file => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+      fileReader.onerror = error => {
+        reject(error);
+      };
+    });
+  };
+
+  const handleIcon = async (e, setFieldValue) => {
+    const file = e.target.files[0];
+    //check the size of image
+    if (file?.size / 1024 / 1024 < 2) {
+      const base64 = await convertToBase64(file);
+      setFieldValue('image', base64);
+    } else {
+      alert('Image size must be of 2MB or less');
+    }
+  };
+
   return (
     <div className="flex flex-col bg-slate-100 justify-center items-center min-h-screen">
       <h1>Add Clothes To Clorare</h1>
@@ -113,6 +137,25 @@ export default function Add() {
                 </div>
               );
             })}
+            <Field name="image">
+              {({ form, field, meta }) => {
+                const { setFieldValue } = form;
+                return (
+                  <div className="m-4">
+                    <span className="mr-4">image</span>
+                    <input
+                      type="file"
+                      className="form-control"
+                      required
+                      onChange={e => handleIcon(e, setFieldValue)}
+                    />
+                    {meta.touched && meta.error && (
+                      <div className="error">{meta.error}</div>
+                    )}
+                  </div>
+                );
+              }}
+            </Field>
             <button
               type="submit"
               disabled={isSubmitting}

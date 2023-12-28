@@ -85,7 +85,7 @@ class ClothesView(APIView):
                 })
             ),
             status.HTTP_400_BAD_REQUEST: openapi.Response(
-                'Fail', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
+                'Failed', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
                     'message': sw.sms_400
                 })
             )
@@ -116,7 +116,7 @@ class ClothesDetailView(APIView):
                 })
             ),
             status.HTTP_500_INTERNAL_SERVER_ERROR: openapi.Response(
-                'Success', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
+                'Failed', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
                     'message': sw.sms_500
                 })
             )
@@ -154,12 +154,12 @@ class ClothesDetailView(APIView):
                 })
             ),
             status.HTTP_400_BAD_REQUEST: openapi.Response(
-                'Fail', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
+                'Failed', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
                     'message': sw.sms_400
                 })
             ),
             status.HTTP_500_INTERNAL_SERVER_ERROR: openapi.Response(
-                'Success', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
+                'Failed', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
                     'message': sw.sms_500
                 })
             )
@@ -184,7 +184,7 @@ class ClothesDetailView(APIView):
                 })
             ),
             status.HTTP_500_INTERNAL_SERVER_ERROR: openapi.Response(
-                'Success', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
+                'Failed', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
                     'message': sw.sms_500
                 })
             )
@@ -273,3 +273,36 @@ class ClothesRecommendationView(APIView):
 
         serializer = ClorareSerializer(context)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class ClothesCleanUpView(APIView):
+    @swagger_auto_schema(
+        operation_id='Delete all clothes data',
+        operation_description='Delete all clothes data',
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                'key': sw.del_key
+            },
+            required=['key']
+        ),
+        responses={
+            status.HTTP_202_ACCEPTED: openapi.Response(
+                'Success', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
+                    'message': sw.sms_202
+                })
+            ),
+            status.HTTP_403_FORBIDDEN: openapi.Response(
+                'Failed', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
+                    'message': sw.sms_403
+                })
+            )
+        }
+    )
+    def post(self, request):
+        if request.data['key'] == "delete all clothes data":
+            queryset = Clothes.objects.all()
+            queryset.delete()
+            return Response({'message': 'Cloth deleted'}, status=status.HTTP_202_ACCEPTED)
+        return Response({'message': 'Incorrect delete key'}, status=status.HTTP_403_FORBIDDEN)
+

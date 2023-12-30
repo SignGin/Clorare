@@ -8,7 +8,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from .models import Clothes
-from .serializers import ClothesSerializer, ClorareSerializer
+from .serializers import ClothesSerializer, ClorareSerializer, dec_b64_img
 from . import swagger as sw
 
 p = os.path.abspath('.') + r'\openweather'
@@ -92,11 +92,17 @@ class ClothesView(APIView):
         }
     )
     def post(self, request):
-        serializer = ClothesSerializer(data=request.data)
-        if serializer.is_valid():
-            queryset = serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            request.data['image'] = dec_b64_img(request.data)
+            serializer = ClothesSerializer(data=request.data)
+            if serializer.is_valid():
+                queryset = serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            print(serializer.errors)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except Exception as e:
+            print(str(e))
+            return Response({'message': str(e)})
 
 
 class ClothesDetailView(APIView):

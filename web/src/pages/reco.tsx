@@ -4,7 +4,6 @@ import Image from 'next/image';
 import AppLayout from '@/components/AppLayout';
 import { serverDomain } from '@/utils/constants';
 import Link from 'next/link';
-import { borderLinkStyle } from '@/styles';
 
 enum gender {
   female = 0,
@@ -203,10 +202,18 @@ function Recomend() {
           </div>
         )}
         <div className="flex gap-5 mt-10 mb-5">
-          <div className={borderLinkStyle}>
+          <div
+            className={
+              'border-4 border-orange-700 hover:border-orange-900 hover:bg-slate-50 p-1 rounded-md'
+            }
+          >
             <Link href={'/'}>Go Home</Link>
           </div>
-          <div className={borderLinkStyle}>
+          <div
+            className={
+              'border-4 border-orange-700 hover:border-orange-900 hover:bg-slate-50 p-1 rounded-md'
+            }
+          >
             <Link href={'/clothes/add'}>Add Styles</Link>
           </div>
         </div>

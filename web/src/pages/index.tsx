@@ -4,7 +4,6 @@ import AppLayout from '@/components/AppLayout';
 import { motionVariants } from '@/utils/motion';
 import Link from 'next/link';
 import MainIntroduce from '@/components/MainIntroduce';
-import { borderLinkStyle } from '@/styles';
 
 export default function Home({ randomBgColor }: { randomBgColor: string }) {
   return (
@@ -16,10 +15,20 @@ export default function Home({ randomBgColor }: { randomBgColor: string }) {
           Clothing recommendation service according to the weather
         </h1>
         <div className="flex flex-row space-x-2">
-          <Link href="/reco" className={borderLinkStyle}>
+          <Link
+            href="/reco"
+            className={
+              'border-4 border-orange-700 hover:border-orange-900 hover:bg-slate-50 p-1 rounded-md'
+            }
+          >
             Let's Go ~!
           </Link>
-          <Link href="/clothes/add" className={borderLinkStyle}>
+          <Link
+            href="/clothes/add"
+            className={
+              'border-4 border-orange-700 hover:border-orange-900 hover:bg-slate-50 p-1 rounded-md'
+            }
+          >
             add clothes
           </Link>
         </div>

@@ -69,10 +69,10 @@ CORS_ALLOW_HEADERS = [
     'x-requested-with',
 ]
 
-# CSRF
-CSRF_TRUSTED_ORIGINS = [
-    'http://localhost:3000'
-]
+# # CSRF
+# CSRF_TRUSTED_ORIGINS = [
+#     'http://localhost:3000'
+# ]
 
 ROOT_URLCONF = 'clorare_server.urls'
 
@@ -147,7 +147,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 # Media files
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

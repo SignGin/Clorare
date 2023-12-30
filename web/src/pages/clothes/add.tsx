@@ -2,7 +2,6 @@ import { ErrorMessage, Field, Formik } from 'formik';
 import { ErrorClothes, PostClothes } from '@/types/postClothes';
 import axios from 'axios';
 import { Category, Gender, Season } from '@/types/enums';
-import { borderLinkStyle } from '@/styles';
 import Link from 'next/link';
 
 const formRequiredData = ['category', 'cloth_type', 'season', 'gender'];
@@ -19,7 +18,7 @@ export default function Add() {
     image: null,
   };
 
-  const convertToBase64 = file => {
+  const convertToBase64 = (file: any) => {
     return new Promise((resolve, reject) => {
       const fileReader = new FileReader();
       fileReader.readAsDataURL(file);
@@ -32,7 +31,7 @@ export default function Add() {
     });
   };
 
-  const handleIcon = async (e, setFieldValue) => {
+  const handleIcon = async (e: any, setFieldValue: any) => {
     const file = e.target.files[0];
     //check the size of image
     if (file?.size / 1024 / 1024 < 2) {
@@ -138,7 +137,7 @@ export default function Add() {
               );
             })}
             <Field name="image">
-              {({ form, field, meta }) => {
+              {({ form, meta }: { form: any; meta: any }) => {
                 const { setFieldValue } = form;
                 return (
                   <div className="m-4">
@@ -167,10 +166,18 @@ export default function Add() {
         )}
       </Formik>
       <div className="flex gap-5 mt-10 mb-5">
-        <div className={borderLinkStyle}>
+        <div
+          className={
+            'border-4 border-orange-700 hover:border-orange-900 hover:bg-slate-50 p-1 rounded-md'
+          }
+        >
           <Link href={'/'}>Go Home</Link>
         </div>
-        <div className={borderLinkStyle}>
+        <div
+          className={
+            'border-4 border-orange-700 hover:border-orange-900 hover:bg-slate-50 p-1 rounded-md'
+          }
+        >
           <Link href={'/reco'}>Get Recommendation</Link>
         </div>
       </div>

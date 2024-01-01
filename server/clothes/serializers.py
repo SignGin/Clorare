@@ -17,7 +17,6 @@ def dec_b64_img(dict_data):
         with open(image_root, 'wb') as f:
             f.write(dec_data)
 
-        print(f'/{image_name}.{ext}')
         return f'/{image_name}.{ext}'
     return None
 

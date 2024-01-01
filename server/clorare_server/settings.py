@@ -55,24 +55,18 @@ MIDDLEWARE = [
 ]
 
 # DJANGO-CORS-HEADERS
-CORS_ALLOW_ALL_ORIGINS = True
+# CORS_ALLOW_ALL_ORIGINS = True
 
-CORS_ALLOW_HEADERS = [
-    'accept',
-    'accept-encoding',
-    'authorization',
-    'content-type',
-    'dnt',
-    'origin',
-    'user-agent',
-    'x-csrftoken',
-    'x-requested-with',
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
 ]
 
-# # CSRF
-# CSRF_TRUSTED_ORIGINS = [
-#     'http://localhost:3000'
-# ]
+CORS_ALLOW_CREDENTIALS = True
+
+# CSRF
+CSRF_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+]
 
 ROOT_URLCONF = 'clorare_server.urls'
 

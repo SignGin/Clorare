@@ -1,14 +1,14 @@
 def time():
     import datetime
-    time_format = '%Y%m%d'
+    time_format = '%y%m%d%H%M%S'
     return datetime.datetime.now().strftime(time_format)
 
 
 def dec_b64_img(dict_data):
-    import base64
-    from django.conf import settings
-
     if dict_data['image']:
+        import base64
+        from django.conf import settings
+
         header, data = dict_data['image'].split(';base64,')
         data_format, ext = header.split('/')
 
@@ -19,5 +19,23 @@ def dec_b64_img(dict_data):
         with open(image_root, 'wb') as f:
             f.write(dec_data)
 
-        return f'/{image_name}.{ext}'
+        return f'{image_name}.{ext}'
+    return None
+
+
+def modifying_image_path(dict_data):
+    if dict_data['image']:
+        from django.conf import settings
+
+        file_name = dict_data['image']
+        image = f'{settings.MEDIA_ROOT}\\clothes\\{file_name}'
+
+        context = {
+            'category': dict_data['category'],
+            'cloth_type': dict_data['cloth_type'],
+            'season': dict_data['season'],
+            'gender': dict_data['gender'],
+            'image': image
+        }
+        return context
     return None

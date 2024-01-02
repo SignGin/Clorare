@@ -9,7 +9,7 @@ from rest_framework import status
 from .models import Clothes
 from .serializers import ClothesSerializer, ClorareSerializer
 from . import swagger as sw
-from .utils import dec_b64_img
+from .utils import dec_b64_img, modifying_image_path
 
 p = os.path.abspath('.') + r'\openweather'
 sys.path.insert(1, p)
@@ -272,9 +272,9 @@ class ClothesRecommendationView(APIView):
         serialized_coat = ClothesSerializer(cloth_coat).data
 
         context = {
-            "top": serialized_top,
-            "bot": serialized_bottom,
-            "coat": serialized_coat,
+            "top": modifying_image_path(serialized_top),
+            "bot": modifying_image_path(serialized_bottom),
+            "coat": modifying_image_path(serialized_coat),
             "gender": gender_str[gender],
             "w_data": weather_data
         }

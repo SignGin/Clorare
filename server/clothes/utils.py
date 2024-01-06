@@ -24,18 +24,18 @@ def dec_b64_img(dict_data):
 
 
 def modifying_image_path(dict_data):
+    image = dict_data['image']
     if dict_data['image']:
         from django.conf import settings
 
         file_name = dict_data['image']
         image = f'{settings.MEDIA_ROOT}\\clothes\\{file_name}'
 
-        context = {
-            'category': dict_data['category'],
-            'cloth_type': dict_data['cloth_type'],
-            'season': dict_data['season'],
-            'gender': dict_data['gender'],
-            'image': image
-        }
-        return context
-    return None
+    context = {
+        'category': dict_data['category'],
+        'cloth_type': dict_data['cloth_type'],
+        'season': dict_data['season'],
+        'gender': dict_data['gender'],
+        'image': image
+    }
+    return context

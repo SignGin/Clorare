@@ -44,7 +44,9 @@ export default function Add() {
 
   return (
     <div className="flex flex-col bg-slate-100 justify-center items-center min-h-screen">
-      <h1>Add Clothes To Clorare</h1>
+      <h1 className="m-4 font-bold text-2xl italic">
+        Add Clothes To Clorare ✨
+      </h1>
       <Formik
         initialValues={initialValues}
         validate={values => {
@@ -142,10 +144,10 @@ export default function Add() {
                 return (
                   <div className="m-4">
                     <span className="mr-4">image</span>
+                    <br />
                     <input
                       type="file"
                       className="form-control"
-                      required
                       onChange={e => handleIcon(e, setFieldValue)}
                     />
                     {meta.touched && meta.error && (

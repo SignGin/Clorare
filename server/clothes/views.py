@@ -1,6 +1,5 @@
-import os, sys
-
-from django.http import JsonResponse
+import os
+import sys
 from django.middleware import csrf
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
@@ -8,8 +7,9 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from .models import Clothes
-from .serializers import ClothesSerializer, ClorareSerializer, dec_b64_img
+from .serializers import ClothesSerializer, ClorareSerializer
 from . import swagger as sw
+from .utils import dec_b64_img, modifying_image_path
 
 p = os.path.abspath('.') + r'\openweather'
 sys.path.insert(1, p)
@@ -30,10 +30,8 @@ class CSRFTokenView(APIView):
         }
     )
     def get(self, request):
-        csrf_token = csrf.get_token(request)
-        response = JsonResponse({'message': 'CSRF Token 이 발급되었습니다.'})
-        response.set_cookie('csrftoken', csrf_token)
-        return response
+        csrf_token = {'csrftoken': csrf.get_token(request)}
+        return Response({'message': 'CSRF Token 이 발급되었습니다.'}, status=status.HTTP_200_OK, headers=csrf_token)
 
 
 # Create your views here.
@@ -93,8 +91,14 @@ class ClothesView(APIView):
     )
     def post(self, request):
         try:
-            request.data['image'] = dec_b64_img(request.data)
-            serializer = ClothesSerializer(data=request.data)
+            context = {
+                'category': request.data['category'],
+                'cloth_type': request.data['cloth_type'],
+                'season': request.data['season'],
+                'gender': request.data['gender'],
+                'image': dec_b64_img(request.data)
+            }
+            serializer = ClothesSerializer(data=context)
             if serializer.is_valid():
                 queryset = serializer.save()
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -268,9 +272,9 @@ class ClothesRecommendationView(APIView):
         serialized_coat = ClothesSerializer(cloth_coat).data
 
         context = {
-            "top": serialized_top,
-            "bot": serialized_bottom,
-            "coat": serialized_coat,
+            "top": modifying_image_path(serialized_top),
+            "bot": modifying_image_path(serialized_bottom),
+            "coat": modifying_image_path(serialized_coat),
             "gender": gender_str[gender],
             "w_data": weather_data
         }

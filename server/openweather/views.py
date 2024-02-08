@@ -56,7 +56,9 @@ class WeatherRequest(APIView):
         }
     )
     def get(self, request):
-        serializer = WeatherSerializer(data=open_weather_api())
+        if open_weather_api()[0]:
+            return Response(open_weather_api()[1], status.HTTP_200_OK)
+        serializer = WeatherSerializer(data=open_weather_api()[1])
 
         if serializer.is_valid():
             weather_data = serializer.save()

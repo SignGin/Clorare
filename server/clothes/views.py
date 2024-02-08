@@ -249,7 +249,7 @@ class ClothesRecommendationView(APIView):
     )
     def get(self, request, gender):
         gender_str = ["female", "male", "unisex"]
-        weather_data = open_weather_api()
+        weather_data = open_weather_api()[1]
 
         if weather_data["temperature"] >= 30:
             season = "summer"

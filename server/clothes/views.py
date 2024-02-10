@@ -267,6 +267,16 @@ class ClothesRecommendationView(APIView):
         cloth_bottom = queryset.filter(category="bottom").order_by("?").first()
         cloth_coat = queryset.filter(category="coat").order_by("?").first()
 
+        if not cloth_top:
+            return Response({'message': 'Insufficient top clothes data, please register your data'},
+                            status=status.HTTP_404_NOT_FOUND)
+        if not cloth_bottom:
+            return Response({'message': 'Insufficient bottom clothes data, please register your data'},
+                            status=status.HTTP_404_NOT_FOUND)
+        if not cloth_coat:
+            return Response({'message': 'Insufficient coat clothes data, please register your data'},
+                            status=status.HTTP_404_NOT_FOUND)
+
         serialized_top = ClothesSerializer(cloth_top).data
         serialized_bottom = ClothesSerializer(cloth_bottom).data
         serialized_coat = ClothesSerializer(cloth_coat).data

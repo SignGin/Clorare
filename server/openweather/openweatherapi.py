@@ -9,16 +9,18 @@ language = "kr"
 
 
 def date_comparison():
-    queryset = Weather.objects.all().order_by("-time").first()
-    serializer = WeatherSerializer(queryset)
+    if Weather.objects.exists():
+        queryset = Weather.objects.all().order_by("-time").first()
+        serializer = WeatherSerializer(queryset)
 
-    import datetime
-    import pytz
+        import datetime
+        import pytz
 
-    datetime_string = datetime.datetime.strptime(serializer.data['time'], '%Y-%m-%dT%H:%M:%S.%f%z')
-    time_now = datetime.datetime.now(pytz.timezone('Asia/Seoul')) - datetime.timedelta(hours=1)
+        datetime_string = datetime.datetime.strptime(serializer.data['time'], '%Y-%m-%dT%H:%M:%S.%f%z')
+        time_now = datetime.datetime.now(pytz.timezone('Asia/Seoul')) - datetime.timedelta(hours=1)
 
-    return datetime_string > time_now, serializer.data
+        return datetime_string > time_now, serializer.data
+    return False, {}
 
 
 def open_weather_api():

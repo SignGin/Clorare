@@ -244,6 +244,11 @@ class ClothesRecommendationView(APIView):
                         'wind_speed': sw.wms_wind_speed
                     })
                 })
+            ),
+            status.HTTP_404_NOT_FOUND: openapi.Response(
+                'Failed', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
+                    'message': sw.sms_404
+                })
             )
         }
     )

@@ -259,11 +259,6 @@ class ClothesRecommendationView(APIView):
                         'wind_speed': sw.wms_wind_speed
                     })
                 })
-            ),
-            status.HTTP_404_NOT_FOUND: openapi.Response(
-                'Failed', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
-                    'message': sw.sms_404
-                })
             )
         }
     )
@@ -287,16 +282,6 @@ class ClothesRecommendationView(APIView):
             cloth_top = queryset.filter(category="top").order_by("?").first()
             cloth_bottom = queryset.filter(category="bottom").order_by("?").first()
             cloth_coat = queryset.filter(category="coat").order_by("?").first()
-
-            if not cloth_top:
-                return Response({'message': 'Insufficient top clothes data, please register your data'},
-                                status=status.HTTP_404_NOT_FOUND)
-            if not cloth_bottom:
-                return Response({'message': 'Insufficient bottom clothes data, please register your data'},
-                                status=status.HTTP_404_NOT_FOUND)
-            if not cloth_coat:
-                return Response({'message': 'Insufficient coat clothes data, please register your data'},
-                                status=status.HTTP_404_NOT_FOUND)
 
             serialized_top = ClothesSerializer(cloth_top).data
             serialized_bottom = ClothesSerializer(cloth_bottom).data

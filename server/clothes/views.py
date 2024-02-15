@@ -264,7 +264,7 @@ class ClothesRecommendationView(APIView):
     )
     def get(self, request, gender):
         try:
-            gender_str = ["female", "male", "unisex"]
+            gender_str = ["female", "male"]
             weather_data = open_weather_api()[1]
 
             if weather_data["temperature"] >= 30:

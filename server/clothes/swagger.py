@@ -3,8 +3,8 @@ from drf_yasg import openapi
 # Request Parameter
 rp_id = openapi.Parameter('id', openapi.IN_PATH, type=openapi.TYPE_INTEGER,
                           description='cloth id')
-rp_gender = openapi.Parameter('gender', openapi.IN_PATH, type=openapi.TYPE_INTEGER, enum=[0, 1, 2],
-                              description='gender to wear cloth\nfemale=0\nmale=1\nunisex=2')
+rp_gender = openapi.Parameter('gender', openapi.IN_PATH, type=openapi.TYPE_INTEGER, enum=[0, 1],
+                              description='gender to wear cloth\nfemale=0\nmale=1')
 
 # Cloth Model Schema
 cms_id = openapi.Schema(type=openapi.TYPE_INTEGER,
@@ -45,6 +45,8 @@ sms_400 = openapi.Schema(type=openapi.TYPE_STRING,
                          description='400 error message')
 sms_403 = openapi.Schema(type=openapi.TYPE_STRING,
                          description='403 error message')
+sms_404 = openapi.Schema(type=openapi.TYPE_STRING,
+                         description='404 error message')
 sms_500 = openapi.Schema(type=openapi.TYPE_STRING,
                          description='500 error message')
 

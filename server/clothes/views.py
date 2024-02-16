@@ -30,8 +30,11 @@ class CSRFTokenView(APIView):
         }
     )
     def get(self, request):
-        csrf_token = {'csrftoken': csrf.get_token(request)}
-        return Response({'message': 'CSRF Token 이 발급되었습니다.'}, status=status.HTTP_200_OK, headers=csrf_token)
+        try:
+            csrf_token = {'csrftoken': csrf.get_token(request)}
+            return Response({'message': 'CSRF Token 이 발급되었습니다.'}, status=status.HTTP_200_OK, headers=csrf_token)
+        except Exception as e:
+            return Response({'message': str(e)})
 
 
 # Create your views here.
@@ -53,9 +56,12 @@ class ClothesView(APIView):
         }
     )
     def get(self, request):
-        queryset = Clothes.objects.all()
-        serializer = ClothesSerializer(queryset, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        try:
+            queryset = Clothes.objects.all()
+            serializer = ClothesSerializer(queryset, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({'message': str(e)})
 
     @swagger_auto_schema(
         operation_id='Add cloth data',
@@ -131,9 +137,12 @@ class ClothesDetailView(APIView):
         }
     )
     def get(self, request, pk):
-        queryset = Clothes.objects.get(pk=pk)
-        serializer = ClothesSerializer(queryset)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        try:
+            queryset = Clothes.objects.get(pk=pk)
+            serializer = ClothesSerializer(queryset)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({'message': str(e)})
 
     @swagger_auto_schema(
         operation_id='Update cloth data',
@@ -174,12 +183,15 @@ class ClothesDetailView(APIView):
         }
     )
     def put(self, request, pk):
-        queryset = Clothes.objects.get(pk=pk)
-        serializer = ClothesSerializer(queryset, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            queryset = Clothes.objects.get(pk=pk)
+            serializer = ClothesSerializer(queryset, data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except Exception as e:
+            return Response({'message': str(e)})
 
     @swagger_auto_schema(
         operation_id='Delete cloth data',
@@ -199,9 +211,12 @@ class ClothesDetailView(APIView):
         }
     )
     def delete(self, request, pk):
-        queryset = Clothes.objects.get(pk=pk)
-        queryset.delete()
-        return Response({'message': 'Cloth deleted'}, status=status.HTTP_202_ACCEPTED)
+        try:
+            queryset = Clothes.objects.get(pk=pk)
+            queryset.delete()
+            return Response({'message': 'Cloth deleted'}, status=status.HTTP_202_ACCEPTED)
+        except Exception as e:
+            return Response({'message': str(e)})
 
 
 class ClothesRecommendationView(APIView):
@@ -248,39 +263,42 @@ class ClothesRecommendationView(APIView):
         }
     )
     def get(self, request, gender):
-        gender_str = ["female", "male", "unisex"]
-        weather_data = open_weather_api()[1]
+        try:
+            gender_str = ["female", "male"]
+            weather_data = open_weather_api()[1]
 
-        if weather_data["temperature"] >= 30:
-            season = "summer"
-        elif weather_data["temperature"] >= 20:
-            season = "autumn"
-        elif weather_data["temperature"] >= 10:
-            season = "spring"
-        else:
-            season = "winter"
+            if weather_data["temperature"] >= 30:
+                season = "summer"
+            elif weather_data["temperature"] >= 20:
+                season = "autumn"
+            elif weather_data["temperature"] >= 10:
+                season = "spring"
+            else:
+                season = "winter"
 
-        queryset = Clothes.objects.exclude(gender=gender_str[1-int(gender)])
-        queryset = queryset.filter(season=season)
+            queryset = Clothes.objects.exclude(gender=gender_str[1-int(gender)])
+            queryset = queryset.filter(season=season)
 
-        cloth_top = queryset.filter(category="top").order_by("?").first()
-        cloth_bottom = queryset.filter(category="bottom").order_by("?").first()
-        cloth_coat = queryset.filter(category="coat").order_by("?").first()
+            cloth_top = queryset.filter(category="top").order_by("?").first()
+            cloth_bottom = queryset.filter(category="bottom").order_by("?").first()
+            cloth_coat = queryset.filter(category="coat").order_by("?").first()
 
-        serialized_top = ClothesSerializer(cloth_top).data
-        serialized_bottom = ClothesSerializer(cloth_bottom).data
-        serialized_coat = ClothesSerializer(cloth_coat).data
+            serialized_top = ClothesSerializer(cloth_top).data
+            serialized_bottom = ClothesSerializer(cloth_bottom).data
+            serialized_coat = ClothesSerializer(cloth_coat).data
 
-        context = {
-            "top": modifying_image_path(serialized_top),
-            "bot": modifying_image_path(serialized_bottom),
-            "coat": modifying_image_path(serialized_coat),
-            "gender": gender_str[gender],
-            "w_data": weather_data
-        }
+            context = {
+                "top": modifying_image_path(serialized_top),
+                "bot": modifying_image_path(serialized_bottom),
+                "coat": modifying_image_path(serialized_coat),
+                "gender": gender_str[gender],
+                "w_data": weather_data
+            }
 
-        serializer = ClorareSerializer(context)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+            serializer = ClorareSerializer(context)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({'message': str(e)})
 
 
 class ClothesCleanUpView(APIView):
@@ -308,9 +326,12 @@ class ClothesCleanUpView(APIView):
         }
     )
     def post(self, request):
-        if request.data['key'] == "delete all clothes data":
-            queryset = Clothes.objects.all()
-            queryset.delete()
-            return Response({'message': 'Cloth deleted'}, status=status.HTTP_202_ACCEPTED)
-        return Response({'message': 'Incorrect delete key'}, status=status.HTTP_403_FORBIDDEN)
+        try:
+            if request.data['key'] == "delete all clothes data":
+                queryset = Clothes.objects.all()
+                queryset.delete()
+                return Response({'message': 'Cloth deleted'}, status=status.HTTP_202_ACCEPTED)
+            return Response({'message': 'Incorrect delete key'}, status=status.HTTP_403_FORBIDDEN)
+        except Exception as e:
+            return Response({'message': str(e)})
 

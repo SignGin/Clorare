@@ -30,9 +30,12 @@ class WeatherList(APIView):
         }
     )
     def get(self, request):
-        weather = Weather.objects.all()
-        serializer = WeatherSerializer(weather, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        try:
+            weather = Weather.objects.all()
+            serializer = WeatherSerializer(weather, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({'message': str(e)})
 
 
 class WeatherRequest(APIView):
@@ -56,10 +59,13 @@ class WeatherRequest(APIView):
         }
     )
     def get(self, request):
-        if open_weather_api()[0]:
-            return Response(open_weather_api()[1], status.HTTP_200_OK)
-        serializer = WeatherSerializer(data=open_weather_api()[1])
+        try:
+            if open_weather_api()[0]:
+                return Response(open_weather_api()[1], status.HTTP_200_OK)
+            serializer = WeatherSerializer(data=open_weather_api()[1])
 
-        if serializer.is_valid():
-            weather_data = serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            if serializer.is_valid():
+                weather_data = serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+        except Exception as e:
+            return Response({'message': str(e)})

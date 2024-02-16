@@ -10,7 +10,7 @@
 - 23.01.14 ~ 현재진행
 
 ## **DataBase Structure**
-![alt text](clorare-1.png)
+![clorare](https://github.com/SignGin/Clorare/assets/95518318/e216db72-57ae-48cc-a26f-c7b128fa9d01)
 
 ## **API 명세 자동화**
 - swagger(drf-yasg) 적용

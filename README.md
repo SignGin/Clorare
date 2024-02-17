@@ -55,6 +55,40 @@
 </table>
 
 # 2. 팀원소개 및 역할
+<table>
+    <colgroup>
+        <col style="width: 200px;">
+        <col style="width: 200px;">
+    </colgroup>
+    <thead align="center">
+        <tr>
+            <th>이유찬</th>
+            <th>주기현</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td align="center">
+                <img width="170px" src="https://avatars.githubusercontent.com/u/72535475?v=4"/>
+            </td>
+            <td align="center">
+                <img width="200px" src="https://avatars.githubusercontent.com/u/95518318?v=4"/>
+            </td>
+        </tr>
+        <tr>
+            <td align="center">
+                <a href="https://github.com/citron03">🔗citron03</a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/rlguswn">🔗rlguswn</a>
+            </td>
+        </tr>
+        <tr>
+            <td align="center">프론트앤드</td>
+            <td align="center">백앤드</td>
+        </tr>
+    </tbody>
+</table>
 # 3. 프로젝트 요약
 # 4. 주요 기능 소개
 # 5. 기능별 라이브 데모

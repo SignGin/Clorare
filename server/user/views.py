@@ -6,7 +6,7 @@ from .serializers import UserSerializer
 
 
 # Create your views here.
-class Registration(APIView):
+class RegistrationView(APIView):
     def post(self, request):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
@@ -32,6 +32,9 @@ class Registration(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class Login(APIView):
+class UserLoginView(APIView):
     def post(self):
+        pass
+
+    def delete(self):
         pass

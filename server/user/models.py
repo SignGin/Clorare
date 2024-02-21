@@ -38,7 +38,7 @@ class User(AbstractBaseUser):
     last_login = models.DateTimeField(auto_now=True)
     date_joined = models.DateTimeField(auto_now_add=True)
 
-    objects = UserManager
+    objects = UserManager()
 
     USERNAME_FIELD = 'email'
     EMAIL_FIELD = 'email'

@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import ClothesView, ClothesDetailView, ClothesRecommendationView, CSRFTokenView, ClothesCleanUpView
+from .views import ClothesView, ClothesDetailView, ClothesRecommendationView, ClothesCleanUpView
 
 app_name = 'clothes'
 
@@ -13,5 +13,5 @@ urlpatterns = [
     # 옷 DB 초기화
     path('clean-up/', ClothesCleanUpView.as_view()),
     # csrf-token
-    path('csrf/', CSRFTokenView.as_view())
+    # path('csrf/', CSRFTokenView.as_view())
 ]

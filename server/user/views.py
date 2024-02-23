@@ -1,3 +1,4 @@
+from django.contrib.auth import authenticate
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
@@ -33,8 +34,33 @@ class RegistrationView(APIView):
 
 
 class UserLoginView(APIView):
-    def post(self):
-        pass
+    def post(self, request):
+        # 수정필요(인증 문제)
+        user = authenticate(
+            email=request.data.get("email"),
+            password=request.data.get("password")
+        )
+        if user:
+            serializer = UserSerializer(user)
+            token = TokenObtainPairSerializer.get_token(user)
+            refresh_token = str(token)
+            access_token = str(token.access_token)
+            response = Response(
+                {
+                    "user": serializer.data,
+                    "message": "register success",
+                    "token": {
+                        "access": access_token,
+                        "refresh": refresh_token,
+                    },
+                },
+                status=status.HTTP_200_OK,
+            )
+            response.set_cookie("access", access_token)
+            response.set_cookie("refresh", refresh_token)
+            return response
+        return Response({'message': "Account that does not exist or password is not correct"},
+                        status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self):
         pass

@@ -63,4 +63,11 @@ class UserLoginView(APIView):
                         status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self):
-        pass
+        response = Response({
+            "message": "Logout succcess",
+            },
+            status=status.HTTP_202_ACCEPTED
+        )
+        response.delete_cookie("access")
+        response.delete_cookie("refresh")
+        return response

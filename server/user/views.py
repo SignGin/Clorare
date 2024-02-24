@@ -35,7 +35,6 @@ class RegistrationView(APIView):
 
 class UserLoginView(APIView):
     def post(self, request):
-        # 수정필요(인증 문제)
         user = authenticate(
             email=request.data.get("email"),
             password=request.data.get("password")
@@ -62,7 +61,7 @@ class UserLoginView(APIView):
         return Response({'message': "Account that does not exist or password is not correct"},
                         status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self):
+    def delete(self, request):
         response = Response({
             "message": "Logout succcess",
             },

@@ -1,13 +1,56 @@
 from django.contrib.auth import authenticate
+from drf_yasg import openapi
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from .serializers import UserSerializer
+from . import swagger as sw
 
 
 # Create your views here.
 class RegistrationView(APIView):
+    @swagger_auto_schema(
+        operation_id='User Register',
+        operation_description='User Register',
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                'email': sw.ums_email,
+                'password': sw.ums_password
+            },
+            required=['email', 'password']
+        ),
+        responses={
+            status.HTTP_200_OK: openapi.Response(
+                'Success', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
+                    'user': openapi.Schema(type=openapi.TYPE_OBJECT, properties={
+                        'id': sw.ums_id,
+                        'password': sw.ums_password,
+                        'email': sw.ums_email,
+                        'name': sw.ums_name,
+                        'is_staff': sw.ums_is_staff,
+                        'is_superuser': sw.ums_is_superuser,
+                        'last_login': sw.ums_last_login,
+                        'date_joined': sw.ums_date_joined
+                    }),
+                    'message': sw.sms_200,
+                    'token': openapi.Schema(type=openapi.TYPE_OBJECT, properties={
+                        'access': sw.ts_access_token,
+                        'refresh': sw.ts_refresh_token
+                    }),
+                    'access_token': sw.access_token,
+                    'refresh_token': sw.refresh_token
+                })
+            ),
+            status.HTTP_400_BAD_REQUEST: openapi.Response(
+                'Failed', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
+                    'message': sw.sms_400
+                })
+            )
+        }
+    )
     def post(self, request):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():

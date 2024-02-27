@@ -77,6 +77,46 @@ class RegistrationView(APIView):
 
 
 class UserLoginView(APIView):
+    @swagger_auto_schema(
+        operation_id='User Login',
+        operation_description='User Login',
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                'email': sw.ums_email,
+                'password': sw.ums_password
+            },
+            required=['email', 'password']
+        ),
+        responses={
+            status.HTTP_200_OK: openapi.Response(
+                'Success', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
+                    'user': openapi.Schema(type=openapi.TYPE_OBJECT, properties={
+                        'id': sw.ums_id,
+                        'password': sw.ums_password,
+                        'email': sw.ums_email,
+                        'name': sw.ums_name,
+                        'is_staff': sw.ums_is_staff,
+                        'is_superuser': sw.ums_is_superuser,
+                        'last_login': sw.ums_last_login,
+                        'date_joined': sw.ums_date_joined
+                    }),
+                    'message': sw.sms_200,
+                    'token': openapi.Schema(type=openapi.TYPE_OBJECT, properties={
+                        'access': sw.ts_access_token,
+                        'refresh': sw.ts_refresh_token
+                    }),
+                    'access_token': sw.access_token,
+                    'refresh_token': sw.refresh_token
+                })
+            ),
+            status.HTTP_400_BAD_REQUEST: openapi.Response(
+                'Failed', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
+                    'message': sw.sms_400
+                })
+            )
+        }
+    )
     def post(self, request):
         user = authenticate(
             email=request.data.get("email"),
@@ -90,7 +130,7 @@ class UserLoginView(APIView):
             response = Response(
                 {
                     "user": serializer.data,
-                    "message": "register success",
+                    "message": "Login success",
                     "token": {
                         "access": access_token,
                         "refresh": refresh_token,

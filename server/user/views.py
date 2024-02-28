@@ -144,6 +144,17 @@ class UserLoginView(APIView):
         return Response({'message': "Account that does not exist or password is not correct"},
                         status=status.HTTP_400_BAD_REQUEST)
 
+    @swagger_auto_schema(
+        operation_id='User Logout',
+        operation_description='User Logout',
+        responses={
+            status.HTTP_202_ACCEPTED: openapi.Response(
+                'Success', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
+                    'message': sw.sms_202,
+                })
+            ),
+        }
+    )
     def delete(self, request):
         response = Response({
             "message": "Logout succcess",

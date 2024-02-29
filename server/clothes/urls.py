@@ -12,6 +12,4 @@ urlpatterns = [
     path('reco/<int:gender>/', ClothesRecommendationView.as_view()),
     # 옷 DB 초기화
     path('clean-up/', ClothesCleanUpView.as_view()),
-    # csrf-token
-    # path('csrf/', CSRFTokenView.as_view())
 ]

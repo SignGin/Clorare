@@ -75,6 +75,8 @@ REST_FRAMEWORK = {
     ),
 }
 
+REST_USE_JWT = True
+
 CSRF_COOKIE_SECURE = False
 
 REST_AUTH = {
@@ -84,9 +86,9 @@ REST_AUTH = {
     'JWT_AUTH_COOKIE_USE_CSRF': True,
     'JWT_AUTH_COOKIE': 'clorare-auth-cookie',
     'JWT_AUTH_REFRESH_COOKIE': 'clorare-refresh-cookie',
-    'LOGOUT_ON_PASSWORD_CHANGE': True,
-    'LOGIN_SERIALIZER': 'user.serializers.UserLoginSerializer',
-    'REGISTER_SERIALIZER': 'user.serializers.UserRegisterSerializer',
+    # 'LOGOUT_ON_PASSWORD_CHANGE': True,
+    # 'LOGIN_SERIALIZER': 'user.serializers.UserLoginSerializer',
+    # 'REGISTER_SERIALIZER': 'user.serializers.UserRegisterSerializer',
 }
 
 SIMPLE_JWT = {

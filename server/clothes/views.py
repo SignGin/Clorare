@@ -1,6 +1,5 @@
 import os
 import sys
-from django.middleware import csrf
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.views import APIView
@@ -14,27 +13,6 @@ from .utils import dec_b64_img, modifying_image_path
 p = os.path.abspath('.') + r'\openweather'
 sys.path.insert(1, p)
 from openweatherapi import open_weather_api
-
-
-class CSRFTokenView(APIView):
-    @swagger_auto_schema(
-        operation_id='CSRF-Token',
-        operation_description='Request CSRF-Token',
-        responses={
-            status.HTTP_200_OK: openapi.Response(
-                'Success', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
-                    'csrftoken': sw.csrf_token,
-                    'message': sw.sms_200
-                })
-            )
-        }
-    )
-    def get(self, request):
-        try:
-            csrf_token = {'csrftoken': csrf.get_token(request)}
-            return Response({'message': 'CSRF Token 이 발급되었습니다.'}, status=status.HTTP_200_OK, headers=csrf_token)
-        except Exception as e:
-            return Response({'message': str(e)})
 
 
 # Create your views here.

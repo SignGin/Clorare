@@ -11,7 +11,11 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 import os
+import datetime
 from pathlib import Path
+
+# Auth User Model
+AUTH_USER_MODEL = 'user.User'
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -39,15 +43,17 @@ INSTALLED_APPS = [
     'dotenv',
     'drf_yasg',
     'rest_framework',
+    'rest_framework_simplejwt',
     'clothes',
     'openweather',
+    'user',
 ]
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -56,26 +62,54 @@ MIDDLEWARE = [
 
 # DJANGO-CORS-HEADERS
 CORS_ORIGIN_ALLOW_ALL = False
-CORS_ORIGIN_WHITELIST = [
+CORS_ALLOWED_ORIGINS = [
+    "http://127.0.0.1:8000",
     "http://127.0.0.1:3000"
 ]
-
 CORS_ALLOW_CREDENTIALS = True
 
-# CSRF
-CSRF_ALLOWED_ORIGINS = [
-    'http://127.0.0.1:3000',
-]
-CSRF_COOKIE_AGE = 86400
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        # 'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
 
+REST_USE_JWT = True
+
+CSRF_COOKIE_SECURE = False
+
+REST_AUTH = {
+    'USE_JWT': True,
+    'SESSION_LOGIN': False,
+    'JWT_AUTH_HTTPONLY': False,
+    'JWT_AUTH_COOKIE_USE_CSRF': True,
+    'JWT_AUTH_COOKIE': 'clorare-auth-cookie',
+    'JWT_AUTH_REFRESH_COOKIE': 'clorare-refresh-cookie',
+    # 'LOGOUT_ON_PASSWORD_CHANGE': True,
+    # 'LOGIN_SERIALIZER': 'user.serializers.UserLoginSerializer',
+    # 'REGISTER_SERIALIZER': 'user.serializers.UserRegisterSerializer',
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(days=7),
+    'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=49),
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True,
+    'UPDATE_LAST_LOGIN': True,
+}
+
+# SESSION
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 SESSION_COOKIE_AGE = 86400
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 ROOT_URLCONF = 'clorare_server.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

@@ -1,8 +1,8 @@
 import { useCallback, useState } from 'react';
-import axios from 'axios';
+import axios from '@/utils/axios';
 import Image from 'next/image';
 import AppLayout from '@/components/AppLayout';
-import { serverDomain } from '@/utils/constants';
+import { CLOTHES_ADD_LINK, serverDomain } from '@/utils/constants';
 import Link from 'next/link';
 
 enum gender {
@@ -214,7 +214,7 @@ function Recomend() {
               'border-4 border-orange-700 hover:border-orange-900 hover:bg-slate-50 p-1 rounded-md'
             }
           >
-            <Link href={'/clothes/add'}>Add Styles</Link>
+            <Link href={CLOTHES_ADD_LINK}>Add Styles</Link>
           </div>
         </div>
       </div>

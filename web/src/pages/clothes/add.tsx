@@ -1,8 +1,9 @@
 import { ErrorMessage, Field, Formik } from 'formik';
 import { ErrorClothes, PostClothes } from '@/types/postClothes';
-import axios from 'axios';
+import axios from '@/utils/axios';
 import { Category, Gender, Season } from '@/types/enums';
 import Link from 'next/link';
+import { CLOTHES_RECOMMEND_LINK } from '@/utils/constants';
 
 const formRequiredData = ['category', 'cloth_type', 'season', 'gender'];
 const seasons = ['spring', 'summer', 'autumn', 'winter'];
@@ -180,7 +181,7 @@ export default function Add() {
             'border-4 border-orange-700 hover:border-orange-900 hover:bg-slate-50 p-1 rounded-md'
           }
         >
-          <Link href={'/reco'}>Get Recommendation</Link>
+          <Link href={CLOTHES_RECOMMEND_LINK}>Get Recommendation</Link>
         </div>
       </div>
     </div>

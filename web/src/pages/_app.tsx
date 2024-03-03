@@ -1,35 +1,27 @@
+import { useAuthTokenStore } from '@/atom/auth';
 import '@/styles/globals.css';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import axios from 'axios';
 import type { AppProps } from 'next/app';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 const queryClient = new QueryClient();
 
-let isFirst = true;
-
 export default function App({ Component, pageProps }: AppProps) {
-  // axios default 설정
-  axios.defaults.baseURL = 'http://127.0.0.1:8000';
-  axios.defaults.withCredentials = true;
+  // 로그인 체크
+  const { accessToken, refreshToken } = useAuthTokenStore();
+  const router = useRouter();
 
-  // axios의 설정을 django에 맞게 맞춘다.
-  axios.defaults.xsrfCookieName = 'csrftoken';
-  axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+  useEffect(() => {
+    // console.log(router.pathname);
+    const pathName = router.pathname;
+    const exceptionPath = ['/', '/auth/login', '/auth/signUp'];
+    if (!exceptionPath.includes(pathName) && !accessToken && !refreshToken) {
+      // 로그인 필요
+      router.push('/auth/login');
+    }
+  });
 
-  axios.interceptors.request.use(
-    function (config) {
-      // 요청이 전달되기 전에 작업 수행
-      if (isFirst) {
-        axios.get('/clothes/csrf/'); // 토큰 발급
-        isFirst = false;
-      }
-      return config;
-    },
-    function (error) {
-      // 요청 오류가 있는 작업 수행
-      return Promise.reject(error);
-    },
-  );
   return (
     <QueryClientProvider client={queryClient}>
       <Component {...pageProps} />

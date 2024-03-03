@@ -4,6 +4,7 @@ import AppLayout from '@/components/AppLayout';
 import { motionVariants } from '@/utils/motion';
 import Link from 'next/link';
 import MainIntroduce from '@/components/MainIntroduce';
+import { CLOTHES_ADD_LINK, CLOTHES_RECOMMEND_LINK } from '@/utils/constants';
 
 export default function Home({ randomBgColor }: { randomBgColor: string }) {
   return (
@@ -16,7 +17,7 @@ export default function Home({ randomBgColor }: { randomBgColor: string }) {
         </h1>
         <div className="flex flex-row space-x-2">
           <Link
-            href="/reco"
+            href={CLOTHES_RECOMMEND_LINK}
             className={
               'border-4 border-orange-700 hover:border-orange-900 hover:bg-slate-50 p-1 rounded-md'
             }
@@ -24,7 +25,7 @@ export default function Home({ randomBgColor }: { randomBgColor: string }) {
             Let's Go ~!
           </Link>
           <Link
-            href="/clothes/add"
+            href={CLOTHES_ADD_LINK}
             className={
               'border-4 border-orange-700 hover:border-orange-900 hover:bg-slate-50 p-1 rounded-md'
             }

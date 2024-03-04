@@ -21,13 +21,13 @@ const Login = () => {
   };
 
   const handleLogin = async () => {
-    const res = await axios.post('/user/login', {
+    const res = await axios.post('/user/login/', {
       email,
       password,
     });
     if (res.status === 200) {
-      setAccessToken(res.data.access_token);
-      setRefreshToken(res.data.refresh_token);
+      setAccessToken(res.data.token.access);
+      setRefreshToken(res.data.token.refresh);
       router.push('/');
     }
   };

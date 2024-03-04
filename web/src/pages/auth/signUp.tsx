@@ -8,7 +8,7 @@ const SignUp = () => {
   const router = useRouter();
 
   const handleSignUp = async () => {
-    const res = await axios.post('/user/register', {
+    const res = await axios.post('/user/register/', {
       email,
       password,
     });

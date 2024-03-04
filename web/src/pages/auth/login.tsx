@@ -26,8 +26,8 @@ const Login = () => {
       password,
     });
     if (res.status === 200) {
-      setAccessToken(res.data.access_token);
-      setRefreshToken(res.data.refresh_token);
+      setAccessToken(res.data.token.access);
+      setRefreshToken(res.data.token.refresh);
       router.push('/');
     }
   };

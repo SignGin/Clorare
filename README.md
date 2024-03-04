@@ -1,71 +1,94 @@
 # **Clorare**
-## **개요** 📋
->**프로젝트명** : Clorare (Clothes Random Recommendation Project) <br>
-**기획 및 제작** : 이유찬(Front-end), 주기현(Back-end)<br>
-**분류** : Clorare Project (2인 협업) <br>
-**주요 기능** : 현재 날씨에 따른 옷 랜덤추천 기능 <br>
-**사용 툴** : Python, Django, MySQL, JavaScript, Next.js
+- 프로젝트명 : Clorare (Clothes Random Recommendation Project) <br>
+- 기획 및 제작 : 이유찬(Front-end), 주기현(Back-end)<br>
+- 주제 : 옷 랜덤 추천
+  - 현재 날씨에 따라 등록된 데이터에서 옷을 추천해주는 서비스입니다. <br>
+- 사용 툴 : Python, Django, MySQL, JavaScript, Next.js
 
-## **프로젝트를 기획한 이유**
->**혹시, 약속 시간에 맞춰 급하게 나가느라 날씨에 맞지 않는 옷을 입으신 적이 있으신가요?** <br>
-우리의 "Clorare Project"는 이러한 고민에서 출발했습니다.
+![clorare메인](https://github.com/rlguswn/DeveLearn/assets/95518318/22c5fad5-ed2a-4ad1-8766-8f58df049033)
+## **개발 기간**
+- 23.01.14 ~ 현재진행
 
-날씨에 맞게 어떤 옷을 입어야 할지 한번쯤은 옷장 앞에서 망설여 본 적이 있을 거에요! <br>
-(물론 개발자들은 24/7 체크셔츠가 default 지만요 😂)
+## **DataBase Structure**
+![clorare](https://github.com/SignGin/Clorare/assets/95518318/e216db72-57ae-48cc-a26f-c7b128fa9d01)
 
-"Clorare Project"는 **결정이 힘든 당신을 위해 날씨에 맞는 옷을 랜덤으로 추천**해드려요 :)
+## **API 명세 자동화**
+- swagger(drf-yasg) 적용
 
-우리의 Clorare 은 단순히 **성별을 선택하고 요청 버튼**을 누르는 것 만으로도 쉽게 오늘의 패션을 추천받을 수 있어요.
+![clorare api명세](https://github.com/SignGin/Clorare/assets/95518318/1fc4f629-24f2-40c9-a4e8-6c2548b3a759)
 
-이 프로젝트를 통해 user님들의 외출을 *빠르고*, **명쾌하게** 도와드리겠습니다!
+## **Index**
+[1. 기술스택 & 개발환경](#1-기술-스택--개발-환경)  
+[2. 팀원소개 및 역할](#2-팀원소개-및-역할)  
+[3. 프로젝트 요약](#3-프로젝트-요약)  
+[4. 주요 기능 소개](#4-주요-기능-소개)  
+[5. 라이브 데모](#5-기능별-라이브-데모)  
 
-## **기획과 디자인**
-### **플로우**
-내용 추가 예정
+# 1. 기술 스택 & 개발 환경
+<table>
+    <thead align="center">
+        <tr>
+            <th><span>BE</span></th>
+            <th><span>FE</span></th>
+            <th><span>DB</span></th>
+            <th><span>MANAGEMENT</span></th>
+        </tr>
+    </thead>
+    <tbody>
+          <td align="center">
+              <img src="https://img.shields.io/badge/python-3776AB?style=for-the-badge&logo=python&logoColor=white">
+              <img src="https://img.shields.io/badge/django-092E20?style=for-the-badge&logo=django&logoColor=white">
+          </td>
+          <td align="center">
+              <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white">
+              <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
+              <img src="https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white">
+          </td>
+          <td align="center">
+              <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white">
+          </td>
+          <td align="center">
+            <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
+            <img src="https://img.shields.io/badge/discord-5865F2?style=for-the-badge&logo=discord&logoColor=white">
+          </td>
+    </tbody>
+</table>
 
-### **화면 구성**
-내용 추가 예정
-
-## **주요 기능**
-내용 추가 예정
-
-## **사용 예시**
-내용 추가 예정
-
-### demo test practice
-### SignGin's first repository
-
-<!-- # **Clorare**
-## **개요** 📋
->**프로젝트명** : Clorare (Clothes Random Recommendation Project) <br>
-**기획 및 제작** : 이유찬(Front-end), 주기현(Back-end)<br>
-**분류** : Clorare Project (2인 협업) <br>
-**주요 기능** : 현재 날씨에 따른 옷 랜덤추천 기능 <br>
-**사용 툴** : Python, Django, MySQL, JavaScript, Next.js
-
-## **1. 프로젝트를 기획한 이유**
->**날씨를 확인하기 힘들거나 매일 어떤 옷을 입어야 할 지 고민이 될 때!** <br>
-고민없이 옷을 선택해 입을 수 있도록 옷을 랜덤으로 추천해주는 프로젝트를 만들어 보게 되었습니다.
-
-누구나 한번쯤은! **날씨를 신경쓰지 못한채 옷을 고르고 후회**한 경험이나 
-**어떤 옷을 입고 나갈지에 대한 고민**으로 약속된 시간에 늦어본 경험이 있을 것입니다.
-
-위와 같은 경험을 해결할 수 있을만한 프로젝트를 기획해보고자 Clorare 프로젝트를 기획하게 되었습니다.
-
-Clorare는 단순히 **성별을 선택**하고 **요청 버튼**을 누르는 것 만으로 **랜덤으로 옷을 추천**해드립니다.
-
-## **2. 기획과 디자인**
-### **2-1. 플로우**
-내용 추가 예정
-
-### **2-2. 화면 구성**
-내용 추가 예정
-
-## **3. 주요 기능**
-내용 추가 예정
-
-## **4. 사용 예시**
-내용 추가 예정
-
-### demo test practice
-### SignGin's first repository -->
+# 2. 팀원소개 및 역할
+<table>
+    <colgroup>
+        <col style="width: 200px;">
+        <col style="width: 200px;">
+    </colgroup>
+    <thead align="center">
+        <tr>
+            <th>이유찬</th>
+            <th>주기현</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td align="center">
+                <img width="170px" src="https://avatars.githubusercontent.com/u/72535475?v=4"/>
+            </td>
+            <td align="center">
+                <img width="200px" src="https://avatars.githubusercontent.com/u/95518318?v=4"/>
+            </td>
+        </tr>
+        <tr>
+            <td align="center">
+                <a href="https://github.com/citron03">🔗citron03</a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/rlguswn">🔗rlguswn</a>
+            </td>
+        </tr>
+        <tr>
+            <td align="center">프론트앤드</td>
+            <td align="center">백앤드</td>
+        </tr>
+    </tbody>
+</table>
+# 3. 프로젝트 요약
+# 4. 주요 기능 소개
+# 5. 기능별 라이브 데모

@@ -96,7 +96,7 @@ function Recomend() {
           >
             Male 👨
           </button>
-          <button
+          {/* <button
             className={
               commonButton +
               ' ' +
@@ -105,7 +105,7 @@ function Recomend() {
             onClick={() => setSelect(gender.unisex)}
           >
             Unisex ✨
-          </button>
+          </button> */}
         </div>
         <button
           className={

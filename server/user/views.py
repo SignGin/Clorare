@@ -52,6 +52,8 @@ class RegistrationView(APIView):
         }
     )
     def post(self, request):
+        if request.user.is_authenticated:
+            return Response({'message': "Already logged in user"}, status=status.HTTP_400_BAD_REQUEST)
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
             user = serializer.save()
@@ -118,6 +120,8 @@ class UserLoginView(APIView):
         }
     )
     def post(self, request):
+        if request.user.is_authenticated:
+            return Response({'message': "Already logged in user"}, status=status.HTTP_400_BAD_REQUEST)
         user = authenticate(
             email=request.data.get("email"),
             password=request.data.get("password")
@@ -156,11 +160,13 @@ class UserLoginView(APIView):
         }
     )
     def delete(self, request):
-        response = Response({
-            "message": "Logout succcess",
-            },
-            status=status.HTTP_202_ACCEPTED
-        )
-        response.delete_cookie("access")
-        response.delete_cookie("refresh")
-        return response
+        if request.user.is_authenticated:
+            response = Response({
+                "message": "Logout succcess",
+                },
+                status=status.HTTP_202_ACCEPTED
+            )
+            response.delete_cookie("access")
+            response.delete_cookie("refresh")
+            return response
+        return Response({'message': "You are not a logged in user"}, status=status.HTTP_400_BAD_REQUEST)

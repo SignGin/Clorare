@@ -44,10 +44,18 @@ class User(AbstractBaseUser):
     EMAIL_FIELD = 'email'
     REQUIRED_FIELDS = []
 
+    def is_staff(self):
+        return self.is_staff
+
+    def is_superuser(self):
+        return self.is_superuser
+
     def has_module_perms(self, app_label):
+        # return self.is_staff or self.is_superuser
         return True
 
     def has_perm(self, app_label):
+        # return self.is_staff or self.is_superuser
         return True
 
     def __str__(self):

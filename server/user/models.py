@@ -30,10 +30,15 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
+    GENDER = [
+        ('female', '여자'),
+        ('male', '남자'),
+        ('unisex', '공용')
+    ]
     username = None
     email = models.EmailField(unique=True, max_length=255)
     name = models.CharField(max_length=50, null=True, blank=True)
-    is_staff = models.BooleanField(default=False)
+    gender = models.CharField(max_length=6, choices=GENDER)
     is_superuser = models.BooleanField(default=False)
     last_login = models.DateTimeField(auto_now=True)
     date_joined = models.DateTimeField(auto_now_add=True)
@@ -44,18 +49,15 @@ class User(AbstractBaseUser):
     EMAIL_FIELD = 'email'
     REQUIRED_FIELDS = []
 
-    def is_staff(self):
-        return self.is_staff
-
     def is_superuser(self):
         return self.is_superuser
 
     def has_module_perms(self, app_label):
-        # return self.is_staff or self.is_superuser
+        # return self.is_superuser
         return True
 
     def has_perm(self, app_label):
-        # return self.is_staff or self.is_superuser
+        # return self.is_superuser
         return True
 
     def __str__(self):

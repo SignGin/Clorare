@@ -1,8 +1,9 @@
 import { useAuthTokenStore } from '@/atom/auth';
+import Loading from '@/components/Loading';
 import axios from '@/utils/axios';
 import { AUTH_SIGN_UP_LINK } from '@/utils/constants';
 import { useRouter } from 'next/router';
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 
 const Login = () => {
   const router = useRouter();
@@ -35,6 +36,10 @@ const Login = () => {
   const handleSignUp = () => {
     router.push(AUTH_SIGN_UP_LINK);
   };
+
+  if (accessToken && refreshToken) {
+    return <Loading />;
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">

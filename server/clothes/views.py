@@ -1,5 +1,3 @@
-import os
-import sys
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.views import APIView
@@ -9,10 +7,7 @@ from .models import Clothes
 from .serializers import ClothesSerializer, ClorareSerializer
 from . import swagger as sw
 from .utils import dec_b64_img, modifying_image_path
-
-p = os.path.abspath('.') + r'\openweather'
-sys.path.insert(1, p)
-from openweatherapi import open_weather_api
+from openweather.openweatherapi import open_weather_api
 
 
 # Create your views here.

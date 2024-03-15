@@ -248,7 +248,7 @@ class ClothesRecommendationView(APIView):
     def get(self, request, gender):
         try:
             if request.user.is_authenticated:
-                gender_str = ["female", "male"]
+                gender = request.user.gender
                 weather_data = open_weather_api()[1]
 
                 if weather_data["temperature"] >= 30:
@@ -260,7 +260,7 @@ class ClothesRecommendationView(APIView):
                 else:
                     season = "winter"
 
-                queryset = Clothes.objects.exclude(gender=gender_str[1-int(gender)])
+                queryset = Clothes.objects.filter(gender=gender) | Clothes.objects.filter(gender="unisex")
                 queryset = queryset.filter(season=season)
 
                 cloth_top = queryset.filter(category="top").order_by("?").first()
@@ -275,7 +275,7 @@ class ClothesRecommendationView(APIView):
                     "top": modifying_image_path(serialized_top),
                     "bot": modifying_image_path(serialized_bottom),
                     "coat": modifying_image_path(serialized_coat),
-                    "gender": gender_str[gender],
+                    "gender": gender,
                     "w_data": weather_data
                 }
 

@@ -9,3 +9,5 @@ export const AUTH_LOGIN_LINK = '/auth/login';
 export const AUTH_SIGN_UP_LINK = '/auth/signUp';
 
 export const TOKEN_ID = 'token-id';
+
+export const AUTH_LOCAL_STORAGE_KEY = 'auth-storage';

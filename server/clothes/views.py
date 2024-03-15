@@ -206,7 +206,6 @@ class ClothesRecommendationView(APIView):
     @swagger_auto_schema(
         operation_id='Cloth recommendation',
         operation_description='Recommend clothes at random',
-        manual_parameters=[sw.rp_gender],
         responses={
             status.HTTP_200_OK: openapi.Response(
                 'Success', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={

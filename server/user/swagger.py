@@ -15,6 +15,8 @@ ums_email = openapi.Schema(type=openapi.TYPE_STRING,
                            description='user email\nemail format')
 ums_name = openapi.Schema(type=openapi.TYPE_STRING,
                           description='user name\ndefault value is null')
+ums_gender = openapi.Schema(type=openapi.TYPE_STRING,
+                          description='user gender\ndefault value is unisex')
 ums_is_staff = openapi.Schema(type=openapi.TYPE_BOOLEAN,
                               description='staff status')
 ums_is_superuser = openapi.Schema(type=openapi.TYPE_BOOLEAN,

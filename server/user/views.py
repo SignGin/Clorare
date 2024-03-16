@@ -18,7 +18,8 @@ class RegistrationView(APIView):
             type=openapi.TYPE_OBJECT,
             properties={
                 'email': sw.ums_email,
-                'password': sw.ums_password
+                'password': sw.ums_password,
+                'gender': sw.ums_gender
             },
             required=['email', 'password']
         ),
@@ -30,6 +31,7 @@ class RegistrationView(APIView):
                         'password': sw.ums_password,
                         'email': sw.ums_email,
                         'name': sw.ums_name,
+                        'gender': sw.ums_gender,
                         'is_staff': sw.ums_is_staff,
                         'is_superuser': sw.ums_is_superuser,
                         'last_login': sw.ums_last_login,
@@ -98,6 +100,7 @@ class UserLoginView(APIView):
                         'password': sw.ums_password,
                         'email': sw.ums_email,
                         'name': sw.ums_name,
+                        'gender': sw.ums_gender,
                         'is_staff': sw.ums_is_staff,
                         'is_superuser': sw.ums_is_superuser,
                         'last_login': sw.ums_last_login,

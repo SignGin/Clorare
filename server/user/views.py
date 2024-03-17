@@ -160,6 +160,11 @@ class UserLoginView(APIView):
                     'message': sw.sms_202,
                 })
             ),
+            status.HTTP_400_BAD_REQUEST: openapi.Response(
+                'Success', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
+                    'message': sw.sms_400,
+                })
+            ),
         }
     )
     def delete(self, request):

@@ -25,6 +25,11 @@ class ClothesView(APIView):
                     'gender': sw.cms_gender,
                     'image': sw.cms_image
                 })
+            ),
+            status.HTTP_400_BAD_REQUEST: openapi.Response(
+                'Failed', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
+                    'message': sw.sms_400
+                })
             )
         }
     )
@@ -106,6 +111,11 @@ class ClothesDetailView(APIView):
                     'image': sw.cms_image
                 })
             ),
+            status.HTTP_400_BAD_REQUEST: openapi.Response(
+                'Failed', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
+                    'message': sw.sms_400
+                })
+            ),
             status.HTTP_500_INTERNAL_SERVER_ERROR: openapi.Response(
                 'Failed', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
                     'message': sw.sms_500
@@ -184,6 +194,11 @@ class ClothesDetailView(APIView):
                     'message': sw.sms_202
                 })
             ),
+            status.HTTP_400_BAD_REQUEST: openapi.Response(
+                'Failed', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
+                    'message': sw.sms_400
+                })
+            ),
             status.HTTP_500_INTERNAL_SERVER_ERROR: openapi.Response(
                 'Failed', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
                     'message': sw.sms_500
@@ -240,6 +255,11 @@ class ClothesRecommendationView(APIView):
                         'humidity': sw.wms_humidity,
                         'wind_speed': sw.wms_wind_speed
                     })
+                })
+            ),
+            status.HTTP_400_BAD_REQUEST: openapi.Response(
+                'Failed', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
+                    'message': sw.sms_400
                 })
             )
         }
@@ -300,6 +320,11 @@ class ClothesCleanUpView(APIView):
             status.HTTP_202_ACCEPTED: openapi.Response(
                 'Success', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
                     'message': sw.sms_202
+                })
+            ),
+            status.HTTP_400_BAD_REQUEST: openapi.Response(
+                'Failed', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
+                    'message': sw.sms_400
                 })
             ),
             status.HTTP_403_FORBIDDEN: openapi.Response(

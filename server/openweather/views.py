@@ -26,6 +26,11 @@ class WeatherList(APIView):
                     'wind_speed': sw.wms_wind_speed,
                     'time': sw.wms_time
                 })
+            ),
+            status.HTTP_400_BAD_REQUEST: openapi.Response(
+                'Failed', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
+                    'message': sw.sms_400
+                })
             )
         }
     )
@@ -56,6 +61,11 @@ class WeatherRequest(APIView):
                     'humidity': sw.wms_humidity,
                     'wind_speed': sw.wms_wind_speed,
                     'time': sw.wms_time
+                })
+            ),
+            status.HTTP_400_BAD_REQUEST: openapi.Response(
+                'Failed', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
+                    'message': sw.sms_400
                 })
             )
         }

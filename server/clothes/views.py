@@ -30,6 +30,11 @@ class ClothesView(APIView):
                 'Failed', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
                     'message': sw.sms_400
                 })
+            ),
+            status.HTTP_500_INTERNAL_SERVER_ERROR: openapi.Response(
+                'Failed', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
+                    'message': sw.sms_500
+                })
             )
         }
     )
@@ -71,6 +76,11 @@ class ClothesView(APIView):
             status.HTTP_400_BAD_REQUEST: openapi.Response(
                 'Failed', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
                     'message': sw.sms_400
+                })
+            ),
+            status.HTTP_500_INTERNAL_SERVER_ERROR: openapi.Response(
+                'Failed', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
+                    'message': sw.sms_500
                 })
             )
         }
@@ -261,6 +271,11 @@ class ClothesRecommendationView(APIView):
                 'Failed', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
                     'message': sw.sms_400
                 })
+            ),
+            status.HTTP_500_INTERNAL_SERVER_ERROR: openapi.Response(
+                'Failed', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
+                    'message': sw.sms_500
+                })
             )
         }
     )
@@ -330,6 +345,11 @@ class ClothesCleanUpView(APIView):
             status.HTTP_403_FORBIDDEN: openapi.Response(
                 'Failed', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
                     'message': sw.sms_403
+                })
+            ),
+            status.HTTP_500_INTERNAL_SERVER_ERROR: openapi.Response(
+                'Failed', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
+                    'message': sw.sms_500
                 })
             )
         }

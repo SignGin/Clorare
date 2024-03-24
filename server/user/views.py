@@ -50,6 +50,11 @@ class RegistrationView(APIView):
                 'Failed', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
                     'message': sw.sms_400
                 })
+            ),
+            status.HTTP_500_INTERNAL_SERVER_ERROR: openapi.Response(
+                'Failed', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
+                    'message': sw.sms_500
+                })
             )
         }
     )
@@ -119,6 +124,11 @@ class UserLoginView(APIView):
                 'Failed', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
                     'message': sw.sms_400
                 })
+            ),
+            status.HTTP_500_INTERNAL_SERVER_ERROR: openapi.Response(
+                'Failed', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
+                    'message': sw.sms_500
+                })
             )
         }
     )
@@ -165,6 +175,11 @@ class UserLoginView(APIView):
                     'message': sw.sms_400,
                 })
             ),
+            status.HTTP_500_INTERNAL_SERVER_ERROR: openapi.Response(
+                'Failed', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
+                    'message': sw.sms_500
+                })
+            )
         }
     )
     def delete(self, request):

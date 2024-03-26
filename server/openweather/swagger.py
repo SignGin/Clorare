@@ -19,3 +19,9 @@ wms_wind_speed = openapi.Schema(type=openapi.FORMAT_FLOAT,
                                 description='wind speed when you request')
 wms_time = openapi.Schema(type=openapi.FORMAT_DATETIME,
                           description='time when you request')
+
+# System Message Schema
+sms_400 = openapi.Schema(type=openapi.TYPE_STRING,
+                         description='400 error message')
+sms_500 = openapi.Schema(type=openapi.TYPE_STRING,
+                         description='500 error message')

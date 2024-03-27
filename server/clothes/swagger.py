@@ -43,8 +43,6 @@ sms_400 = openapi.Schema(type=openapi.TYPE_STRING,
                          description='400 error message')
 sms_403 = openapi.Schema(type=openapi.TYPE_STRING,
                          description='403 error message')
-sms_404 = openapi.Schema(type=openapi.TYPE_STRING,
-                         description='404 error message')
 sms_500 = openapi.Schema(type=openapi.TYPE_STRING,
                          description='500 error message')
 

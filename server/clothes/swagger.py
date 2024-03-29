@@ -46,10 +46,6 @@ sms_403 = openapi.Schema(type=openapi.TYPE_STRING,
 sms_500 = openapi.Schema(type=openapi.TYPE_STRING,
                          description='500 error message')
 
-# Header Schema
-csrf_token = openapi.Schema(type=openapi.IN_HEADER,
-                       description='CSRF-Token')
-
 # key str
 del_key = openapi.Schema(type=openapi.TYPE_STRING,
                          description='The key for clean up all clothes data is\n(delete all clothes data)')

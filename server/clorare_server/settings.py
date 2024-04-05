@@ -17,7 +17,7 @@ SECRET_KEY = "DJANGO_SECRET_KEY"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", default=False)
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 INSTALLED_APPS = [
@@ -49,12 +49,12 @@ MIDDLEWARE = [
 ]
 
 # DJANGO-CORS-HEADERS
-CORS_ORIGIN_ALLOW_ALL = False
-CORS_ALLOWED_ORIGINS = [
-    "http://127.0.0.1:8000",
-    "http://127.0.0.1:3000",
-    "http://localhost:3000",
-]
+CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ALLOWED_ORIGINS = [
+#     "http://127.0.0.1:8000",
+#     "http://127.0.0.1:3000",
+#     "http://localhost:3000",
+# ]
 CORS_ALLOW_CREDENTIALS = True
 
 REST_FRAMEWORK = {

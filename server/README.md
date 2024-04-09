@@ -4,7 +4,7 @@
 
 ## 실행 방법
 
-1. 파이썬 설치
+1. Docker 설치
 
 2. cmd에서 server 폴더로 이동
 
@@ -12,35 +12,23 @@
 
    - server 폴더에 .env 파일 생성 (환경변수 및 키 파일)
 
-4. 가상환경 생성
+4. Docker 실행
 
    - cmd 입력</br>
-     python -m venv venv
+     docker-compose up -d --build
 
-5. 가상환경 실행
-
-   - cmd 입력</br>
-     venv\Scripts\activate.bat
-
-6. 가상환경에 필요 모듈 설치
+5. 모델 적용
 
    - cmd 입력</br>
-     pip install -r requirements.txt
-
-7. 모델 적용
-
-   - cmd 입력</br>
+     docker exec -it django bash</br>
      python manage.py makemigrations</br>
-     python manage.py migrate
+     python manage.py migrate</br>
 
-8. 시드 적용
+6. 시드 적용
 
    - cmd 입력</br>
      python manage.py add_data --total [원하는 데이터 수]
-
-9. 서버 실행
-   - cmd 입력</br>
-     python manage.py runserver 입력(서버 실행)
+     exit
 
 </br></br>
 

@@ -1,10 +1,5 @@
 from drf_yasg import openapi
 
-# Request Parameter
-rp_id = openapi.Parameter('id', openapi.IN_PATH, type=openapi.TYPE_INTEGER,
-                          description='cloth id')
-rp_gender = openapi.Parameter('gender', openapi.IN_PATH, type=openapi.TYPE_INTEGER, enum=[0, 1],
-                              description='gender to wear cloth\nfemale=0\nmale=1')
 
 # User Model Schema
 ums_id = openapi.Schema(type=openapi.TYPE_INTEGER,
@@ -15,6 +10,8 @@ ums_email = openapi.Schema(type=openapi.TYPE_STRING,
                            description='user email\nemail format')
 ums_name = openapi.Schema(type=openapi.TYPE_STRING,
                           description='user name\ndefault value is null')
+ums_gender = openapi.Schema(type=openapi.TYPE_STRING, enum=['female', 'male', 'unisex'],
+                          description='user gender\ndefault value is unisex')
 ums_is_staff = openapi.Schema(type=openapi.TYPE_BOOLEAN,
                               description='staff status')
 ums_is_superuser = openapi.Schema(type=openapi.TYPE_BOOLEAN,
@@ -31,10 +28,6 @@ sms_202 = openapi.Schema(type=openapi.TYPE_STRING,
                          description='202 accepted message')
 sms_400 = openapi.Schema(type=openapi.TYPE_STRING,
                          description='400 error message')
-sms_403 = openapi.Schema(type=openapi.TYPE_STRING,
-                         description='403 error message')
-sms_404 = openapi.Schema(type=openapi.TYPE_STRING,
-                         description='404 error message')
 sms_500 = openapi.Schema(type=openapi.TYPE_STRING,
                          description='500 error message')
 

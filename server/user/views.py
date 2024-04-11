@@ -18,7 +18,8 @@ class RegistrationView(APIView):
             type=openapi.TYPE_OBJECT,
             properties={
                 'email': sw.ums_email,
-                'password': sw.ums_password
+                'password': sw.ums_password,
+                'gender': sw.ums_gender
             },
             required=['email', 'password']
         ),
@@ -30,6 +31,7 @@ class RegistrationView(APIView):
                         'password': sw.ums_password,
                         'email': sw.ums_email,
                         'name': sw.ums_name,
+                        'gender': sw.ums_gender,
                         'is_staff': sw.ums_is_staff,
                         'is_superuser': sw.ums_is_superuser,
                         'last_login': sw.ums_last_login,
@@ -48,10 +50,17 @@ class RegistrationView(APIView):
                 'Failed', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
                     'message': sw.sms_400
                 })
+            ),
+            status.HTTP_500_INTERNAL_SERVER_ERROR: openapi.Response(
+                'Failed', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
+                    'message': sw.sms_500
+                })
             )
         }
     )
     def post(self, request):
+        if request.user.is_authenticated:
+            return Response({'message': "Already logged in user"}, status=status.HTTP_400_BAD_REQUEST)
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
             user = serializer.save()
@@ -96,6 +105,7 @@ class UserLoginView(APIView):
                         'password': sw.ums_password,
                         'email': sw.ums_email,
                         'name': sw.ums_name,
+                        'gender': sw.ums_gender,
                         'is_staff': sw.ums_is_staff,
                         'is_superuser': sw.ums_is_superuser,
                         'last_login': sw.ums_last_login,
@@ -114,10 +124,17 @@ class UserLoginView(APIView):
                 'Failed', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
                     'message': sw.sms_400
                 })
+            ),
+            status.HTTP_500_INTERNAL_SERVER_ERROR: openapi.Response(
+                'Failed', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
+                    'message': sw.sms_500
+                })
             )
         }
     )
     def post(self, request):
+        if request.user.is_authenticated:
+            return Response({'message': "Already logged in user"}, status=status.HTTP_400_BAD_REQUEST)
         user = authenticate(
             email=request.data.get("email"),
             password=request.data.get("password")
@@ -153,14 +170,26 @@ class UserLoginView(APIView):
                     'message': sw.sms_202,
                 })
             ),
+            status.HTTP_400_BAD_REQUEST: openapi.Response(
+                'Success', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
+                    'message': sw.sms_400,
+                })
+            ),
+            status.HTTP_500_INTERNAL_SERVER_ERROR: openapi.Response(
+                'Failed', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
+                    'message': sw.sms_500
+                })
+            )
         }
     )
     def delete(self, request):
-        response = Response({
-            "message": "Logout succcess",
-            },
-            status=status.HTTP_202_ACCEPTED
-        )
-        response.delete_cookie("access")
-        response.delete_cookie("refresh")
-        return response
+        if request.user.is_authenticated:
+            response = Response({
+                "message": "Logout succcess",
+                },
+                status=status.HTTP_202_ACCEPTED
+            )
+            response.delete_cookie("access")
+            response.delete_cookie("refresh")
+            return response
+        return Response({'message': "You are not a logged in user"}, status=status.HTTP_400_BAD_REQUEST)

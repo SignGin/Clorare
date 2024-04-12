@@ -26,14 +26,26 @@ class WeatherList(APIView):
                     'wind_speed': sw.wms_wind_speed,
                     'time': sw.wms_time
                 })
+            ),
+            status.HTTP_400_BAD_REQUEST: openapi.Response(
+                'Failed', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
+                    'message': sw.sms_400
+                })
+            ),
+            status.HTTP_500_INTERNAL_SERVER_ERROR: openapi.Response(
+                'Failed', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
+                    'message': sw.sms_500
+                })
             )
         }
     )
     def get(self, request):
         try:
-            weather = Weather.objects.all()
-            serializer = WeatherSerializer(weather, many=True)
-            return Response(serializer.data, status=status.HTTP_200_OK)
+            if request.user.is_authenticated:
+                weather = Weather.objects.all()
+                serializer = WeatherSerializer(weather, many=True)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response({'message': "You are not a logged in user"}, status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
             return Response({'message': str(e)})
 
@@ -55,17 +67,28 @@ class WeatherRequest(APIView):
                     'wind_speed': sw.wms_wind_speed,
                     'time': sw.wms_time
                 })
+            ),
+            status.HTTP_400_BAD_REQUEST: openapi.Response(
+                'Failed', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
+                    'message': sw.sms_400
+                })
+            ),
+            status.HTTP_500_INTERNAL_SERVER_ERROR: openapi.Response(
+                'Failed', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={
+                    'message': sw.sms_500
+                })
             )
         }
     )
     def get(self, request):
         try:
-            if open_weather_api()[0]:
-                return Response(open_weather_api()[1], status.HTTP_200_OK)
-            serializer = WeatherSerializer(data=open_weather_api()[1])
-
-            if serializer.is_valid():
-                weather_data = serializer.save()
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            if request.user.is_authenticated:
+                if open_weather_api()[0]:
+                    return Response(open_weather_api()[1], status.HTTP_200_OK)
+                serializer = WeatherSerializer(data=open_weather_api()[1])
+                if serializer.is_valid():
+                    weather_data = serializer.save()
+                    return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response({'message': "You are not a logged in user"}, status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
             return Response({'message': str(e)})

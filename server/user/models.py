@@ -30,9 +30,15 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
+    GENDER = [
+        ('female', '여자'),
+        ('male', '남자'),
+        ('unisex', '공용')
+    ]
     username = None
     email = models.EmailField(unique=True, max_length=255)
     name = models.CharField(max_length=50, null=True, blank=True)
+    gender = models.CharField(max_length=6, default='unisex', choices=GENDER)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
     last_login = models.DateTimeField(auto_now=True)
